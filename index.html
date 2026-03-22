@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KSU Alumni Ski & Snowboard Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808;
+  --white: #f5f2ed;
+  --blue: #2a7fff;
+  --gold: #e8b84b;
+  --white-10: rgba(245,242,237,0.1);
+  --white-20: rgba(245,242,237,0.2);
+  --white-40: rgba(245,242,237,0.4);
+  --white-60: rgba(245,242,237,0.6);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,8,8,0.93); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(232,184,75,0.18); }
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo img { height: 40px; width: 40px; border-radius: 50%; border: 1px solid rgba(232,184,75,0.3); }
+.nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { color: var(--white-60); text-decoration: none; font-size: 12px; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.25s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { color: var(--black) !important; background: var(--gold); padding: 9px 22px; font-size: 11px !important; font-weight: 500 !important; letter-spacing: 1.5px !important; border: 1px solid var(--gold); transition: all 0.25s !important; }
+.nav-cta:hover { background: transparent !important; color: var(--gold) !important; }
+
+/* HERO */
+.hero { height: 100vh; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 0 52px 80px; }
+.hero-bg { position: absolute; inset: 0; display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 3px; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65); transition: filter 0.5s; }
+.hero-bg img:hover { filter: brightness(0.78); }
+/* Photo specific positions */
+.hero-img-1 { object-position: center 35%; } /* Aerial Rockies */
+.hero-img-2 { object-position: center 30%; } /* CB Valley */
+.hero-img-3 { object-position: 22% center; } /* Skiers on mountain */
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.05) 50%, rgba(8,8,8,0.4) 100%); }
+.hero-content { position: relative; z-index: 2; max-width: 820px; }
+.eyebrow { font-size: 14px; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 9vw, 130px); line-height: 0.92; letter-spacing: 2px; color: var(--white); margin-bottom: 24px; }
+.hero-title span { color: var(--gold); }
+.hero-sub { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 19px; color: var(--white-60); margin-bottom: 44px; line-height: 1.65; max-width: 500px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 14px 32px; text-decoration: none; transition: all 0.25s; border: 1px solid var(--gold); display: inline-block; }
+.btn-primary:hover { background: transparent; color: var(--gold); }
+.btn-ghost { font-size: 11px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: var(--white-60); background: transparent; padding: 14px 32px; text-decoration: none; transition: all 0.25s; border: 1px solid var(--white-20); display: inline-block; }
+.btn-ghost:hover { border-color: var(--white-60); color: var(--white); }
+.hero-scroll { position: absolute; bottom: 36px; right: 52px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--white-40); }
+.hero-scroll-line { width: 1px; height: 52px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+/* SHARED */
+.rule { width: 100%; height: 1px; background: rgba(232,184,75,0.12); }
+.section-tag { font-size: 13px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; display: block; }
+.section-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 5vw, 72px); letter-spacing: 2px; line-height: 1; color: var(--white); margin-bottom: 24px; }
+.section-heading em { color: var(--gold); font-style: normal; }
+.body-text { font-size: 15px; line-height: 1.85; color: var(--white-60); font-weight: 300; }
+.accent-line { width: 48px; height: 2px; background: var(--gold); margin: 24px 0; opacity: 0.7; }
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* TRIP */
+#trip { padding: 110px 52px; }
+.trip-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; }
+.trip-details { display: flex; flex-direction: column; margin-top: 36px; }
+.trip-detail { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(245,242,237,0.06); }
+.trip-detail:first-child { border-top: 1px solid rgba(245,242,237,0.06); }
+.trip-detail-label { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); }
+.trip-detail-value { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--white-60); text-align: right; max-width: 58%; }
+
+/* READY TO RIDE BOX — blue/gold/white themed */
+.register-block { padding: 36px; border: 1px solid rgba(42,127,255,0.4); background: rgba(42,127,255,0.06); margin-bottom: 3px; }
+.register-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px; }
+.register-block p { font-size: 14px; color: var(--white); line-height: 1.8; margin-bottom: 28px; font-weight: 300; }
+.btn-disabled { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); padding: 14px 30px; border: 1px solid var(--blue); cursor: not-allowed; display: inline-block; opacity: 0.7; }
+.trip-photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 3px; }
+.trip-photo-grid img { width: 100%; height: 210px; object-fit: cover; filter: brightness(0.82); transition: filter 0.4s; display: block; }
+.trip-photo-grid img.wide { grid-column: span 2; height: 230px; }
+.trip-photo-grid img:hover { filter: brightness(1); }
+
+/* ABOUT */
+#about { padding: 110px 52px; background: #060606; position: relative; overflow: hidden; }
+.about-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Bebas Neue', sans-serif; font-size: 300px; letter-spacing: 10px; color: rgba(245,242,237,0.018); white-space: nowrap; pointer-events: none; user-select: none; }
+.about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; position: relative; z-index: 1; }
+.about-photos { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 260px 260px; gap: 3px; }
+.about-photos img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: filter 0.4s; display: block; }
+.about-photos img:hover { filter: brightness(1); }
+.about-photos img.tall { grid-row: span 2; object-position: center 15%; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 36px; }
+.stat-block { padding: 22px 18px; background: rgba(245,242,237,0.03); border: 1px solid rgba(245,242,237,0.06); transition: border-color 0.25s; }
+.stat-block:hover { border-color: rgba(232,184,75,0.3); }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 46px; letter-spacing: 1px; color: var(--gold); line-height: 1; }
+.stat-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--white-40); margin-top: 6px; }
+.destinations { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px; }
+.dest-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-40); padding: 6px 14px; border: 1px solid rgba(245,242,237,0.1); transition: all 0.25s; cursor: default; }
+.dest-tag:hover { border-color: var(--blue); color: var(--blue); }
+
+/* GALLERY */
+#gallery { padding: 110px 0; }
+.gallery-header { padding: 0 52px; margin-bottom: 56px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+.gallery-header-right p { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: var(--white-40); text-align: right; line-height: 1.6; }
+.trip-section { margin-bottom: 72px; }
+.trip-section-header { padding: 0 52px; margin-bottom: 18px; display: flex; align-items: center; gap: 18px; }
+.trip-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; color: var(--white); white-space: nowrap; }
+.trip-section-date { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+.trip-section-rule { flex: 1; height: 1px; background: rgba(232,184,75,0.15); }
+.photo-grid { padding: 0 52px; display: grid; gap: 3px; }
+.photo-grid.g-a { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 310px 310px; }
+.photo-grid.g-b { grid-template-columns: repeat(4,1fr); grid-template-rows: 260px 260px; }
+.photo-grid.g-c { grid-template-columns: 1fr 1fr 2fr; grid-template-rows: 310px 310px; }
+.photo-grid.g-d { grid-template-columns: repeat(3,1fr); grid-template-rows: 280px 280px 280px 280px; }
+.photo-item { position: relative; overflow: hidden; cursor: pointer; }
+.photo-item.r2 { grid-row: span 2; }
+.photo-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); transition: transform 0.5s ease, filter 0.4s ease; display: block; }
+.photo-item:hover img { transform: scale(1.08); filter: brightness(1.05); }
+.photo-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,8,8,0.5) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.photo-item:hover .photo-item-overlay { opacity: 1; }
+.photo-item-zoom { position: absolute; bottom: 10px; right: 10px; width: 30px; height: 30px; background: rgba(232,184,75,0.9); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.photo-item:hover .photo-item-zoom { opacity: 1; }
+.photo-item-zoom svg { width: 13px; height: 13px; stroke: var(--black); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.grid-gap { height: 3px; }
+
+/* LIGHTBOX */
+.lightbox { position: fixed; inset: 0; background: rgba(8,8,8,0.97); z-index: 1000; display: none; align-items: center; justify-content: center; }
+.lightbox.active { display: flex; }
+.lightbox-img { max-width: 88vw; max-height: 86vh; object-fit: contain; display: block; }
+.lightbox-close { position: absolute; top: 24px; right: 32px; background: none; border: none; color: var(--white-60); font-size: 36px; cursor: pointer; transition: color 0.2s; line-height: 1; font-weight: 300; }
+.lightbox-close:hover { color: var(--gold); }
+.lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(232,184,75,0.12); border: 1px solid rgba(232,184,75,0.3); color: var(--white); font-size: 20px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+.lightbox-prev { left: 24px; }
+.lightbox-next { right: 24px; }
+.lightbox-prev:hover, .lightbox-next:hover { background: rgba(232,184,75,0.3); border-color: var(--gold); }
+.lightbox-counter { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--white-40); }
+.lightbox-trip-label { position: absolute; top: 24px; left: 32px; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: var(--gold); }
+
+/* FAQ */
+#faq { padding: 110px 52px; background: #060606; }
+.faq-inner { max-width: 860px; margin: 0 auto; }
+.faq-header { margin-bottom: 56px; }
+.faq-item { border-bottom: 1px solid rgba(245,242,237,0.07); }
+.faq-question { width: 100%; background: none; border: none; color: var(--white); text-align: left; padding: 26px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; letter-spacing: 0.3px; line-height: 1.5; transition: color 0.25s; }
+.faq-question:hover { color: var(--gold); }
+.faq-icon { font-size: 22px; font-weight: 300; color: var(--gold); flex-shrink: 0; transition: transform 0.3s; line-height: 1; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-answer-inner { padding: 0 0 26px 0; font-family: 'DM Serif Display', serif; font-size: 17px; line-height: 1.85; color: var(--white-60); max-width: 700px; }
+.faq-item.open .faq-answer { max-height: 320px; }
+
+/* CONTACT */
+#contact { padding: 110px 52px; }
+.contact-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 90px; }
+.contact-form-fields { display: flex; flex-direction: column; gap: 3px; margin-top: 36px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 3px; }
+.form-field label { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); }
+.form-field input, .form-field textarea, .form-field select { background: rgba(245,242,237,0.03); border: 1px solid rgba(245,242,237,0.08); color: var(--white); padding: 12px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: border-color 0.25s; appearance: none; }
+.form-field input:focus, .form-field textarea:focus, .form-field select:focus { border-color: var(--blue); }
+.form-field textarea { min-height: 100px; resize: none; }
+.form-field select option { background: #111; }
+.contact-info-items { display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+.contact-info-item h4 { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+.contact-info-item p { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--white-60); }
+.instagram-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(232,184,75,0.3); padding-bottom: 4px; transition: all 0.25s; }
+.instagram-link:hover { border-bottom-color: var(--gold); color: var(--white); }
+
+/* FOOTER */
+footer { padding: 32px 52px; border-top: 1px solid rgba(232,184,75,0.12); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 3px; color: var(--gold); opacity: 0.6; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="images/kent_alumni_logo_final.png" alt="KSU Alumni Ski Club">
+    <span class="nav-logo-text">KSU Alumni Ski & Snowboard</span>
+  </a>
+  <div class="nav-links">
+    <a href="#trip">The Trip</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="#trip" class="nav-cta">Register</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img class="hero-img-1" src="images/20220109_180333-a2b7.jpg" alt="Aerial Rockies">
+    <img class="hero-img-2" src="images/20240113_193326-c033.jpg" alt="Crested Butte Valley">
+    <img class="hero-img-3" src="images/20220109_214629-4673.jpg" alt="Skiers on mountain">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="eyebrow">Kent State University Alumni</span>
+    <h1 class="hero-title">The Alumni<br>Ski <span>&</span><br>Snowboard Club</h1>
+    <p class="hero-sub">One trip a year. The best mountains in the country. Open to all KSU alumni, friends, and family.</p>
+    <div class="hero-btns">
+      <a href="#trip" class="btn-primary">View the Annual Trip</a>
+      <a href="#about" class="btn-ghost">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- TRIP -->
+<section id="trip">
+  <div class="trip-inner">
+    <div class="fade-in">
+      <span class="section-tag">Annual Ski Trip</span>
+      <h2 class="section-heading">Join Us <em>on the Mountain</em></h2>
+      <div class="accent-line"></div>
+      <p class="body-text">Every January we take over one of the best mountains in the country. We partner with OutsideLife to put together an all-inclusive package covering hotel and lift tickets at a price that's genuinely hard to beat anywhere else.</p>
+      <div class="trip-details">
+        <div class="trip-detail"><span class="trip-detail-label">Dates</span><span class="trip-detail-value">Announced end of summer</span></div>
+        <div class="trip-detail"><span class="trip-detail-label">Destination</span><span class="trip-detail-value">Revealed seasonally</span></div>
+        <div class="trip-detail"><span class="trip-detail-label">Includes</span><span class="trip-detail-value">6 days lodging · lift tickets · events</span></div>
+        <div class="trip-detail"><span class="trip-detail-label">Transportation</span><span class="trip-detail-value">You fly · we help with bus logistics</span></div>
+        <div class="trip-detail"><span class="trip-detail-label">Open To</span><span class="trip-detail-value">KSU alumni · friends · family</span></div>
+        <div class="trip-detail"><span class="trip-detail-label">Payment Deadline</span><span class="trip-detail-value">Early November</span></div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <div class="register-block">
+        <h3>Ready to Ride?</h3>
+        <p>Registration opens seasonally through our trip partner OutsideLife. Drop your info in the contact form below to stay in the loop on announcements.</p>
+        <span class="btn-disabled">Trip Coming Soon</span>
+      </div>
+      <div class="trip-photo-grid">
+        <img src="images/20230108_130051-5cbd.jpg" alt="Shirtless on mountain" style="object-position:center 15%;">
+        <img src="images/20260110_141458-0563.jpg" alt="Retro outfits" style="object-position:center 85%;">
+        <img src="images/20260110_134025-22fa.jpg" alt="JH crew" class="wide" style="object-position:center 100%;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-watermark">KSU</div>
+  <div class="about-inner">
+    <div class="about-photos fade-in">
+      <img class="tall" src="images/20260110_130854-a955.jpg" alt="Solo skier in trees" style="object-position:left center;">
+      <img src="images/20230108_130053-b3e2.jpg" alt="Summit selfie" style="object-position:center 15%;">
+      <img src="images/20260111_175656-ed9f.jpg" alt="Antler arch night" style="object-position:center 35%;">
+    </div>
+    <div class="fade-in">
+      <span class="section-tag">Who We Are</span>
+      <h2 class="section-heading">Built on <em>the Mountain</em></h2>
+      <div class="accent-line"></div>
+      <p class="body-text">The Kent State Alumni Ski & Snowboard Club was co-founded by Andrew Shepherd and Mark Wolterman, originating from the Kent State University Ski & Snowboard Club. After graduation, the mission was simple: keep the crew together and keep shredding the gnar.</p>
+      <br>
+      <p class="body-text">Since our first annual trip to Telluride Mountain in 2022, we've taken alumni to some of the best mountains in the country — Crested Butte, Aspen/Snowmass, and Jackson Hole among them. We partner with OutsideLife to put together an all-inclusive package at a price that's genuinely hard to beat anywhere else.</p>
+      <br>
+      <p class="body-text">Our trip is open to all Kent State alumni, their friends, and family. You handle your flight, we handle the rest. Whether you are a seasoned shredder or clicking into bindings for the first time, you will find your people here.</p>
+      <div class="about-stats">
+        <div class="stat-block"><div class="stat-num">2022</div><div class="stat-label">Founded</div></div>
+        <div class="stat-block"><div class="stat-num">40+</div><div class="stat-label">Alumni per trip</div></div>
+        <div class="stat-block"><div class="stat-num">5</div><div class="stat-label">Trips completed</div></div>
+        <div class="stat-block"><div class="stat-num">∞</div><div class="stat-label">Powder days ahead</div></div>
+      </div>
+      <div class="destinations">
+        <span class="dest-tag">Telluride</span>
+        <span class="dest-tag">Jackson Hole</span>
+        <span class="dest-tag">Crested Butte</span>
+        <span class="dest-tag">Aspen / Snowmass</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header fade-in">
+    <div>
+      <span class="section-tag">Memories on the Mountain</span>
+      <h2 class="section-heading">The <em>Gallery</em></h2>
+    </div>
+    <div class="gallery-header-right"><p>Five years.<br>Five mountains.<br>One crew.</p></div>
+  </div>
+
+  <!-- TELLURIDE '22 -->
+  <div class="trip-section fade-in" data-trip="Telluride '22">
+    <div class="trip-section-header">
+      <span class="trip-section-title">Telluride '22</span>
+      <span class="trip-section-date">Jan 2–7, 2022</span>
+      <div class="trip-section-rule"></div>
+    </div>
+    <div class="photo-grid g-a">
+      <div class="photo-item r2" data-src="images/20220108_132713-ee7c.jpg"><img src="images/20220108_132713-ee7c.jpg" alt="Full crew" style="object-position:center 22%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220109_180333-a2b7.jpg"><img src="images/20220109_180333-a2b7.jpg" alt="Aerial view" style="object-position:center 35%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220109_214629-4673.jpg"><img src="images/20220109_214629-4673.jpg" alt="Skier on mountain" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220109_180352-3b1b.jpg"><img src="images/20220109_180352-3b1b.jpg" alt="Snowboarders lineup" style="object-position:center 80%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220108_121828-802b.jpg"><img src="images/20220108_121828-802b.jpg" alt="Group on slopes" style="object-position:center 55%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    </div>
+    <div class="grid-gap"></div>
+    <div class="photo-grid g-b">
+      <div class="photo-item" data-src="images/20220109_180232-cc4f.jpg"><img src="images/20220109_180232-cc4f.jpg" alt="Summit trio" style="object-position:center 60%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220109_180255-75af.jpg"><img src="images/20220109_180255-75af.jpg" alt="Snowboarders" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220108_165424-4f8b.jpg"><img src="images/20220108_165424-4f8b.jpg" alt="Night ski tree" style="object-position:center 50%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220109_180348-0dbe.jpg"><img src="images/20220109_180348-0dbe.jpg" alt="Gondola sunset" style="object-position:center 40%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220109_180343-12b8.jpg"><img src="images/20220109_180343-12b8.jpg" alt="Group snapshot" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220109_180359-a159.jpg"><img src="images/20220109_180359-a159.jpg" alt="Skier on run" style="object-position:center 55%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20220109_180404-da86.jpg"><img src="images/20220109_180404-da86.jpg" alt="Skier posing" style="object-position:center 90%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    </div>
+  </div>
+
+  <!-- JACKSON HOLE '23 -->
+  <div class="trip-section fade-in" data-trip="Jackson Hole '23">
+    <div class="trip-section-header">
+      <span class="trip-section-title">Jackson Hole '23</span>
+      <span class="trip-section-date">Jan 2–7, 2023</span>
+      <div class="trip-section-rule"></div>
+    </div>
+    <div class="photo-grid g-c">
+      <div class="photo-item" data-src="images/20230108_130051-5cbd.jpg"><img src="images/20230108_130051-5cbd.jpg" alt="Shirtless on mountain" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20230108_130053-b3e2.jpg"><img src="images/20230108_130053-b3e2.jpg" alt="Summit view" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item r2" data-src="images/20230108_130057-d88f.jpg"><img src="images/20230108_130057-d88f.jpg" alt="Crew at JH sign" style="object-position:center 22%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20230108_125802-5bfe.jpg"><img src="images/20230108_125802-5bfe.jpg" alt="Apres ski bar" style="object-position:center 28%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20230108_130056-eb7e.jpg"><img src="images/20230108_130056-eb7e.jpg" alt="Powder snowboarder" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    </div>
+    <div class="grid-gap"></div>
+    <div class="photo-grid g-b">
+      <div class="photo-item" data-src="images/20230108_130052-7647.jpg"><img src="images/20230108_130052-7647.jpg" alt="Solo on summit" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20230108_130054-b755.jpg"><img src="images/20230108_130054-b755.jpg" alt="Dinner out" style="object-position:center 28%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20230108_130057-ec42.jpg"><img src="images/20230108_130057-ec42.jpg" alt="Ranch lot crew" style="object-position:center 22%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20230108_130100-a8f4.jpg"><img src="images/20230108_130100-a8f4.jpg" alt="Resting on slope" style="object-position:center 28%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20230108_201759-fbd5.jpg"><img src="images/20230108_201759-fbd5.jpg" alt="Solo snowboarder" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20230108_201802-a785.jpg"><img src="images/20230108_201802-a785.jpg" alt="Valley view" style="object-position:center 40%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    </div>
+  </div>
+
+  <!-- CRESTED BUTTE '24 -->
+  <div class="trip-section fade-in" data-trip="Crested Butte '24">
+    <div class="trip-section-header">
+      <span class="trip-section-title">Crested Butte '24</span>
+      <span class="trip-section-date">Jan 7–12, 2024</span>
+      <div class="trip-section-rule"></div>
+    </div>
+    <div class="photo-grid g-a">
+      <div class="photo-item r2" data-src="images/20240113_104409-28a7.jpg"><img src="images/20240113_104409-28a7.jpg" alt="CB peak group" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_193326-c033.jpg"><img src="images/20240113_193326-c033.jpg" alt="CB valley" style="object-position:center 55%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_104355-f3c7.jpg"><img src="images/20240113_104355-f3c7.jpg" alt="Aspen grove skier" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_104358-6818.jpg"><img src="images/20240113_104358-6818.jpg" alt="Mushroom mittens" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_115204-d02a.jpg"><img src="images/20240113_115204-d02a.jpg" alt="Summit crew" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    </div>
+    <div class="grid-gap"></div>
+    <div class="photo-grid g-b">
+      <div class="photo-item" data-src="images/20240112_200458-fd60.jpg"><img src="images/20240112_200458-fd60.jpg" alt="Four on slope" style="object-position:center 50%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240112_200502-916e.jpg"><img src="images/20240112_200502-916e.jpg" alt="Chairlift selfie" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_104354-bc53.jpg"><img src="images/20240113_104354-bc53.jpg" alt="POV aspen trees" style="object-position:center 60%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_104355-a5d1.jpg"><img src="images/20240113_104355-a5d1.jpg" alt="Girls crew selfie" style="object-position:center 70%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_115202-446b.jpg"><img src="images/20240113_115202-446b.jpg" alt="Burton board raised" style="object-position:center 18%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_134439-7906.jpg"><img src="images/20240113_134439-7906.jpg" alt="Ice sculpture town" style="object-position:center 28%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_154351-47be.jpg"><img src="images/20240113_154351-47be.jpg" alt="Three skiers" style="object-position:center 60%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20240113_154536-aeb4.jpg"><img src="images/20240113_154536-aeb4.jpg" alt="Goofing in snow" style="object-position:center 50%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    </div>
+  </div>
+
+  <!-- JACKSON HOLE '26 -->
+  <div class="trip-section fade-in" data-trip="Jackson Hole '26">
+    <div class="trip-section-header">
+      <span class="trip-section-title">Jackson Hole '26</span>
+      <span class="trip-section-date">Jan 4–9, 2026</span>
+      <div class="trip-section-rule"></div>
+    </div>
+    <div class="photo-grid g-c">
+      <div class="photo-item" data-src="images/20260112_130449-dec0.jpg"><img src="images/20260112_130449-dec0.jpg" alt="JH crew sign" style="object-position:center 22%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260111_175656-ed9f.jpg"><img src="images/20260111_175656-ed9f.jpg" alt="Antler arch" style="object-position:center 40%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item r2" data-src="images/20260110_134025-22fa.jpg"><img src="images/20260110_134025-22fa.jpg" alt="Five skiers mountain" style="object-position:center 40%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260110_130854-a955.jpg"><img src="images/20260110_130854-a955.jpg" alt="Solo skier in trees" style="object-position:center 50%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260111_182341-6893.jpg"><img src="images/20260111_182341-6893.jpg" alt="Powder run view" style="object-position:center 75%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    </div>
+    <div class="grid-gap"></div>
+    <div class="photo-grid g-d">
+      <div class="photo-item" data-src="images/20260110_131620-8da4.jpg"><img src="images/20260110_131620-8da4.jpg" alt="Bison statue night" style="object-position:center 28%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260110_131620-78bf.jpg"><img src="images/20260110_131620-78bf.jpg" alt="Bootpacking couloir" style="object-position:center 55%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item r2" data-src="images/20260110_141458-358c.jpg"><img src="images/20260110_141458-358c.jpg" alt="Gondola selfie" style="object-position:center 95%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260110_141458-0563.jpg"><img src="images/20260110_141458-0563.jpg" alt="Retro outfits swings" style="object-position:center 65%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260110_141458-1277.jpg"><img src="images/20260110_141458-1277.jpg" alt="Two buried in powder" style="object-position:center 70%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260111_175656-e26a.jpg"><img src="images/20260111_175656-e26a.jpg" alt="Dinner Christmas tree" style="object-position:center 28%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260111_182341-f366.jpg"><img src="images/20260111_182341-f366.jpg" alt="Solo in pine trees" style="object-position:center 45%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260111_182940-d92d.jpg"><img src="images/20260111_182940-d92d.jpg" alt="Four snowboarders" style="object-position:center 45%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260111_182948-9d38.jpg"><img src="images/20260111_182948-9d38.jpg" alt="Two on swings" style="object-position:center 60%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260112_213800-c40c.jpg"><img src="images/20260112_213800-c40c.jpg" alt="Guys at bar" style="object-position:center 45%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+      <div class="photo-item" data-src="images/20260110_141458-cbd5.jpg"><img src="images/20260110_141458-cbd5.jpg" alt="Two girls boards" style="object-position:center 40%;"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="faq-header fade-in">
+      <span class="section-tag">Got Questions?</span>
+      <h2 class="section-heading">Frequently Asked <em>Questions</em></h2>
+    </div>
+    <div class="faq-list fade-in">
+      <div class="faq-item"><button class="faq-question">Do I need to be a KSU alumni to join?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Not at all. Our trips are open to KSU alumni, their friends, and family. If you've got the Flash spirit — or just love the mountains — you are welcome on this trip.</div></div></div>
+      <div class="faq-item"><button class="faq-question">What skill level do I need to be?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">All skill levels are welcome. Whether you are clicking into bindings for the first time, a zoomer arounder, or a calm lay arounder, there's a place for you on this trip.</div></div></div>
+      <div class="faq-item"><button class="faq-question">What's included in the trip package?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Every package includes a hotel bed space and a lift ticket. Additional add-ons like extra lift ticket days and gear rentals may be available through our trip partner OutsideLife.</div></div></div>
+      <div class="faq-item"><button class="faq-question">How do I register for the trip?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Registration is handled through our trip partner OutsideLife. When the trip link drops, you'll be directed to their portal where you can complete payment and set up your room. Keep an eye on our Instagram @ksu_ski_snow_alumni so you don't miss it — the link is only open for about a week.</div></div></div>
+      <div class="faq-item"><button class="faq-question">When does registration open?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">We announce the trip destination as early as possible to build awareness, then drop the registration link shortly after. Registration is only open for about a week, so follow us on Instagram to stay in the loop.</div></div></div>
+      <div class="faq-item"><button class="faq-question">What are the payment deadlines?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">A $100 deposit is required to secure your spot at registration. From there, you'll have approximately one month to complete your total payment. Payment deadline is typically early November.</div></div></div>
+      <div class="faq-item"><button class="faq-question">How does flight and transportation work?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">It depends on the destination. Some mountains are close enough to a major airport that an Uber will get you there. For destinations requiring further road travel, we'll either organize a bussing option or provide links to bus companies running the required route. Details are always shared when the trip is announced.</div></div></div>
+      <div class="faq-item"><button class="faq-question">How does rooming work?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Through the OutsideLife portal you can build a custom rooming list to share a room with your friends. Final room assignments are confirmed by the trip organizers. Rooms typically accommodate 4–6 guests, and any open spaces may be filled with other trip members.</div></div></div>
+      <div class="faq-item"><button class="faq-question">What is OutsideLife?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">OutsideLife is the top ski and snowboard travel company in the US, specializing in college, alumni, and group ski trips at the nation's top ski resorts. They craft one-of-a-kind trips including après ski gatherings, live entertainment, themed parties, and a variety of on and off mountain events. We partner with OutsideLife to handle the logistics of our annual trip so you can focus on having a great time on the mountain.</div></div></div>
+      <div class="faq-item"><button class="faq-question">How many people go on the trip?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Our group grows every year. Our biggest trip to date was Aspen/Snowmass 2025 with 40+ people on the mountain. We expect that number to keep climbing.</div></div></div>
+      <div class="faq-item"><button class="faq-question">When is the destination announced?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">We announce the destination as early as possible — typically by end of summer — to give everyone time to plan. Follow us on Instagram @ksu_ski_snow_alumni to be the first to know.</div></div></div>
+      <div class="faq-item"><button class="faq-question">Can beginners join?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Absolutely — beginners are encouraged to join. We just ask that you come with a plan for the mountain, whether that's bringing a friend who can teach you or booking a ski lesson through the resort. Everyone starts somewhere and the crew is incredibly welcoming.</div></div></div>
+      <div class="faq-item"><button class="faq-question">I want to come for the first time but don't know anybody. Is that okay?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Singles are always welcome. Although it is encouraged to bring at least one friend to share a bed with, we will do our best to communicate potential roommates. Depending on your riding level, we can also introduce you to different groups that come on our trips.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="fade-in">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-heading">Let's <em>Connect</em></h2>
+      <div class="accent-line"></div>
+      <p class="body-text">Questions about the trip? Want to get involved? Follow us on Instagram for the latest announcements or drop us a message below.</p>
+      <div class="contact-info-items">
+        <div class="contact-info-item"><h4>Instagram</h4><p>@ksu_ski_snow_alumni</p></div>
+        <div class="contact-info-item"><h4>Trip Registration</h4><p>Via OutsideLife — announced seasonally</p></div>
+        <div class="contact-info-item"><h4>Based In</h4><p>Kent, Ohio — Skiing Everywhere</p></div>
+      </div>
+      <a href="https://instagram.com/ksu_ski_snow_alumni" class="instagram-link" target="_blank">Follow on Instagram →</a>
+    </div>
+    <div class="fade-in">
+      <div class="contact-form-fields">
+        <div class="form-row">
+          <div class="form-field"><label>First Name</label><input type="text" placeholder="Your first name"></div>
+          <div class="form-field"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+        </div>
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="you@email.com"></div>
+        <div class="form-field"><label>Graduation Year</label><input type="text" placeholder="e.g. 2019"></div>
+        <div class="form-field">
+          <label>I'm interested in...</label>
+          <select><option>The Annual Ski Trip</option><option>General Club Info</option><option>Volunteering / Organizing</option><option>Something Else</option></select>
+        </div>
+        <div class="form-field"><label>Message</label><textarea placeholder="Any questions or comments..."></textarea></div>
+        <button class="btn-primary" type="button" style="align-self:flex-start;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 KSU Alumni Ski & Snowboard Club</p>
+  <span class="footer-logo">KSU Ski & Snowboard</span>
+  <p>Follow us @ksu_ski_snow_alumni</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-trip-label" id="lightboxTrip"></span>
+  <button class="lightbox-close" id="lightboxClose">×</button>
+  <button class="lightbox-prev" id="lightboxPrev">&#8592;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-next" id="lightboxNext">&#8594;</button>
+  <span class="lightbox-counter" id="lightboxCounter"></span>
+</div>
+
+<script>
+// Scroll fade-in
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Lightbox
+let currentPhotos = [], currentIndex = 0, currentTrip = '';
+
+function openLightbox(photos, index, trip) {
+  currentPhotos = photos; currentIndex = index; currentTrip = trip;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateLightbox() {
+  document.getElementById('lightboxImg').src = currentPhotos[currentIndex];
+  document.getElementById('lightboxTrip').textContent = currentTrip;
+  document.getElementById('lightboxCounter').textContent = (currentIndex + 1) + ' / ' + currentPhotos.length;
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLightbox(); });
+document.getElementById('lightboxPrev').addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length; updateLightbox(); });
+document.getElementById('lightboxNext').addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentPhotos.length; updateLightbox(); });
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length; updateLightbox(); }
+  if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentPhotos.length; updateLightbox(); }
+});
+
+document.querySelectorAll('.trip-section').forEach(section => {
+  const trip = section.dataset.trip;
+  const items = Array.from(section.querySelectorAll('.photo-item'));
+  const photos = items.map(item => item.dataset.src);
+  items.forEach((item, i) => {
+    item.addEventListener('click', () => openLightbox(photos, i, trip));
+  });
+});
+</script>
+</body>
+</html>
