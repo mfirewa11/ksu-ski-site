@@ -30,9 +30,21 @@ nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; di
 .nav-links a:hover { color: var(--gold); }
 .nav-cta { color: var(--black) !important; background: var(--gold); padding: 9px 22px; font-size: 11px !important; font-weight: 500 !important; letter-spacing: 1.5px !important; border: 1px solid var(--gold); transition: all 0.25s !important; }
 .nav-cta:hover { background: transparent !important; color: var(--gold) !important; }
+/* Hamburger */
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+/* Mobile nav drawer */
+.nav-mobile-drawer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8,8,8,0.98); z-index: 190; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+.nav-mobile-drawer.open { display: flex; }
+.nav-mobile-drawer a { color: var(--white-60); text-decoration: none; font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 4px; text-transform: uppercase; transition: color 0.25s; }
+.nav-mobile-drawer a:hover { color: var(--gold); }
+.nav-mobile-drawer .nav-cta { color: var(--black) !important; background: var(--gold); padding: 12px 36px; font-size: 18px !important; }
 
 /* HERO */
-.hero { height: 100vh; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 0 52px 80px; }
+.hero { height: 100vh; min-height: 600px; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 0 52px 80px; }
 .hero-bg { position: absolute; inset: 0; display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 3px; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65); transition: filter 0.5s; }
 .hero-bg img:hover { filter: brightness(0.78); }
@@ -173,6 +185,124 @@ nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; di
 footer { padding: 32px 52px; border-top: 1px solid rgba(232,184,75,0.12); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
 .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 3px; color: var(--gold); opacity: 0.6; }
+
+/* =============================================
+   RESPONSIVE — TABLET (≤900px)
+   ============================================= */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .hero { padding: 0 24px 72px; }
+  .hero-scroll { right: 24px; }
+  .hero-bg { grid-template-columns: 1fr 1fr; }
+  .hero-img-3 { display: none; }
+
+  #trip { padding: 80px 24px; }
+  .trip-inner { grid-template-columns: 1fr; gap: 48px; }
+
+  #about { padding: 80px 24px; }
+  .about-inner { grid-template-columns: 1fr; gap: 48px; }
+  .about-photos { grid-template-rows: 220px 220px; }
+
+  #gallery { padding: 80px 0; }
+  .gallery-header { padding: 0 24px; }
+  .trip-section-header { padding: 0 24px; }
+  .photo-grid { padding: 0 24px; }
+  .photo-grid.g-a { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 220px; }
+  .photo-grid.g-a .photo-item.r2 { grid-row: span 1; }
+  .photo-grid.g-b { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px 200px 200px; }
+  .photo-grid.g-c { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 220px; }
+  .photo-grid.g-c .photo-item.r2 { grid-row: span 1; }
+  .photo-grid.g-d { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 220px 220px 220px 220px; }
+
+  #faq { padding: 80px 24px; }
+
+  #contact { padding: 80px 24px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+
+  footer { padding: 28px 24px; }
+}
+
+/* =============================================
+   RESPONSIVE — MOBILE (≤600px)
+   ============================================= */
+@media (max-width: 600px) {
+  nav { padding: 14px 20px; }
+  .nav-logo-text { font-size: 13px; letter-spacing: 1.5px; }
+
+  /* Hero */
+  .hero { padding: 0 20px 60px; align-items: flex-end; }
+  .hero-bg { grid-template-columns: 1fr; }
+  .hero-img-2, .hero-img-3 { display: none; }
+  .hero-img-1 { display: block; }
+  .hero-scroll { display: none; }
+  .hero-sub { font-size: 16px; margin-bottom: 32px; }
+  .hero-btns { flex-direction: column; gap: 10px; }
+  .btn-primary, .btn-ghost { text-align: center; padding: 14px 24px; font-size: 11px; }
+
+  /* Shared section spacing */
+  #trip { padding: 64px 20px; }
+  #about { padding: 64px 20px; }
+  #faq { padding: 64px 20px; }
+  #contact { padding: 64px 20px; }
+  .gallery-header { padding: 0 20px; }
+  .trip-section-header { padding: 0 20px; }
+  .photo-grid { padding: 0 20px; }
+
+  /* Trip section */
+  .trip-inner { gap: 36px; }
+  .trip-photo-grid { display: block; }
+  .trip-photo-grid img { display: none; }
+  .trip-photo-grid img.wide { display: block; grid-column: span 1; height: 220px; width: 100%; object-fit: cover; }
+  .register-block { padding: 24px 20px; }
+  .trip-detail { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .trip-detail-value { text-align: left; max-width: 100%; }
+
+  /* About section — hide photos on mobile */
+  .about-photos { display: none; }
+  .about-inner { grid-template-columns: 1fr; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .stat-num { font-size: 36px; }
+
+  /* Gallery — mobile strip layout */
+  .photo-grid { display: none !important; }
+  .grid-gap { display: none; }
+  .trip-section { margin-bottom: 48px; }
+  .gallery-header-right { display: none; }
+
+  /* Mobile gallery strip */
+  .mobile-gallery-strip { display: block; padding: 0 20px; }
+  .mobile-gallery-cover { position: relative; width: 100%; height: 240px; overflow: hidden; cursor: pointer; }
+  .mobile-gallery-cover img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.85); transition: filter 0.3s; }
+  .mobile-gallery-cover:active img { filter: brightness(1); }
+  .mobile-gallery-cover-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,8,8,0.6) 0%, transparent 60%); pointer-events: none; }
+  .mobile-gallery-cover-label { position: absolute; bottom: 12px; left: 14px; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--white-60); pointer-events: none; }
+  .mobile-gallery-scroll { display: flex; gap: 3px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-top: 3px; }
+  .mobile-gallery-scroll::-webkit-scrollbar { display: none; }
+  .mobile-gallery-scroll-item { flex: 0 0 120px; height: 90px; overflow: hidden; cursor: pointer; position: relative; }
+  .mobile-gallery-scroll-item img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.8); transition: filter 0.3s; }
+  .mobile-gallery-scroll-item:active img { filter: brightness(1); }
+
+  /* FAQ */
+  .faq-question { font-size: 13px; padding: 20px 0; }
+  .faq-answer-inner { font-size: 15px; }
+
+  /* Contact */
+  .contact-inner { gap: 36px; }
+  .form-row { grid-template-columns: 1fr; }
+  .contact-form-fields { margin-top: 20px; }
+
+  /* Footer */
+  footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  /* Lightbox */
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+  .lightbox-img { max-width: 96vw; max-height: 80vh; }
+  .lightbox-close { top: 14px; right: 16px; font-size: 28px; }
+}
 </style>
 </head>
 <body>
@@ -191,7 +321,20 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
     <a href="#contact">Contact</a>
     <a href="#trip" class="nav-cta">Register</a>
   </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-mobile-drawer" id="navDrawer">
+  <a href="#trip" class="nav-drawer-link">The Trip</a>
+  <a href="#about" class="nav-drawer-link">About</a>
+  <a href="#gallery" class="nav-drawer-link">Gallery</a>
+  <a href="#faq" class="nav-drawer-link">FAQ</a>
+  <a href="#contact" class="nav-drawer-link">Contact</a>
+  <a href="#trip" class="nav-cta nav-drawer-link">Register</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -488,6 +631,61 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
 </div>
 
 <script>
+// Build mobile gallery strips (only on mobile)
+function buildMobileGalleryStrips() {
+  if (window.innerWidth > 600) return;
+  document.querySelectorAll('.trip-section').forEach(section => {
+    if (section.querySelector('.mobile-gallery-strip')) return; // already built
+    const trip = section.dataset.trip;
+    const items = Array.from(section.querySelectorAll('.photo-item'));
+    if (!items.length) return;
+    const photos = items.map(item => ({ src: item.dataset.src, alt: item.querySelector('img').alt, style: item.querySelector('img').getAttribute('style') || '' }));
+
+    const strip = document.createElement('div');
+    strip.className = 'mobile-gallery-strip';
+
+    // Cover photo (first)
+    const cover = document.createElement('div');
+    cover.className = 'mobile-gallery-cover';
+    cover.innerHTML = `<img src="${photos[0].src}" alt="${photos[0].alt}" style="${photos[0].style}"><div class="mobile-gallery-cover-overlay"></div><div class="mobile-gallery-cover-label">Tap to view</div>`;
+    cover.addEventListener('click', () => openLightbox(photos.map(p => p.src), 0, trip));
+    strip.appendChild(cover);
+
+    // Scroll strip (remaining photos)
+    if (photos.length > 1) {
+      const scroll = document.createElement('div');
+      scroll.className = 'mobile-gallery-scroll';
+      photos.slice(1).forEach((p, i) => {
+        const thumb = document.createElement('div');
+        thumb.className = 'mobile-gallery-scroll-item';
+        thumb.innerHTML = `<img src="${p.src}" alt="${p.alt}" style="${p.style}">`;
+        thumb.addEventListener('click', () => openLightbox(photos.map(p => p.src), i + 1, trip));
+        scroll.appendChild(thumb);
+      });
+      strip.appendChild(scroll);
+    }
+
+    section.appendChild(strip);
+  });
+}
+
+buildMobileGalleryStrips();
+window.addEventListener('resize', buildMobileGalleryStrips);
+const hamburger = document.getElementById('navHamburger');
+const drawer = document.getElementById('navDrawer');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  drawer.classList.toggle('open');
+  document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.nav-drawer-link').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
 // Scroll fade-in
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
