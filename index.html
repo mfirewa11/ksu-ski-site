@@ -629,7 +629,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
       <div class="faq-item"><button class="faq-question">How does flight and transportation work?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">It depends on the destination. Some mountains are close enough to a major airport that an Uber will get you there. For destinations requiring further road travel, we'll either organize a bussing option or provide links to bus companies running the required route. Details are always shared when the trip is announced.</div></div></div>
       <div class="faq-item"><button class="faq-question">How does rooming work?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Through the OutsideLife portal you can build a custom rooming list to share a room with your friends. Final room assignments are confirmed by the trip organizers. Rooms typically accommodate 4–6 guests, and any open spaces may be filled with other trip members.</div></div></div>
       <div class="faq-item"><button class="faq-question">What is OutsideLife?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">OutsideLife is the top ski and snowboard travel company in the US, specializing in college, alumni, and group ski trips at the nation's top ski resorts. They craft one-of-a-kind trips including après ski gatherings, live entertainment, themed parties, and a variety of on and off mountain events. We partner with OutsideLife to handle the logistics of our annual trip so you can focus on having a great time on the mountain.</div></div></div>
-      <div class="faq-item"><button class="faq-question">How many people go on the trip?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Our group grows every year. Our biggest trip to date was Aspen/Snowmass 2025 with 40+ people on the mountain. We expect that number to keep climbing.</div></div></div>
+      <div class="faq-item"><button class="faq-question">How many people go on the trip?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Our group grows every year. Our biggest trip to date was Aspen/Snowmass 2025 with 50+ people on the mountain. We expect that number to keep climbing.</div></div></div>
       <div class="faq-item"><button class="faq-question">When is the destination announced?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">We announce the destination as early as possible — typically by end of summer — to give everyone time to plan. Follow us on Instagram @ksu_ski_snow_alumni to be the first to know.</div></div></div>
       <div class="faq-item"><button class="faq-question">Can beginners join?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Absolutely — beginners are encouraged to join. We just ask that you come with a plan for the mountain, whether that's bringing a friend who can teach you or booking a ski lesson through the resort. Everyone starts somewhere and the crew is incredibly welcoming.</div></div></div>
       <div class="faq-item"><button class="faq-question">I want to come for the first time but don't know anybody. Is that okay?<span class="faq-icon">+</span></button><div class="faq-answer"><div class="faq-answer-inner">Singles are always welcome. Although it is encouraged to bring at least one friend to share a bed with, we will do our best to communicate potential roommates. Depending on your riding level, we can also introduce you to different groups that come on our trips.</div></div></div>
@@ -806,9 +806,9 @@ document.querySelectorAll('.trip-section').forEach(section => {
 
 // SNOWFLAKE EFFECT
 let snowInterval = null;
-let currentDensity = 0;
+let isSnowing = false;
 
-function createSnowflake(sideways = false) {
+function createSnowflake(sideways = false, intensity = 0) {
   const flake = document.createElement('div');
   flake.classList.add('snowflake');
   flake.innerHTML = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
@@ -817,9 +817,8 @@ function createSnowflake(sideways = false) {
   flake.style.opacity = Math.random() * 0.7 + 0.3;
 
   if (sideways) {
-    // Faster + drifting sideways for button hover
-    const duration = (Math.random() * 2 + 1.5) + 's';
-    const drift = (Math.random() * 120 + 60) * (Math.random() > 0.5 ? 1 : -1);
+    const duration = (Math.random() * 1.5 + 1) + 's';
+    const drift = (Math.random() * 150 + 80) * (Math.random() > 0.5 ? 1 : -1);
     flake.style.animationDuration = duration;
     flake.style.setProperty('--drift', drift + 'px');
     flake.classList.add('snowflake-sideways');
@@ -831,31 +830,73 @@ function createSnowflake(sideways = false) {
   setTimeout(() => flake.remove(), 5000);
 }
 
-function startSnow(mode = 'normal') {
-  stopSnow();
-  const interval = mode === 'fast' ? 30 : 80;
-  const sideways = mode === 'fast';
-  snowInterval = setInterval(() => createSnowflake(sideways), interval);
-}
-
-function stopSnow() {
+function setSnowMode(mode) {
+  // Clear existing interval but DON'T remove existing flakes — keeps it smooth
   clearInterval(snowInterval);
-  snowInterval = null;
-  document.querySelectorAll('.snowflake').forEach(f => f.remove());
+
+  if (mode === 'off') {
+    isSnowing = false;
+    // Let existing flakes fall out naturally, just stop spawning new ones
+    return;
+  }
+
+  isSnowing = true;
+
+  if (mode === 'normal') {
+    snowInterval = setInterval(() => createSnowflake(false), 80);
+  } else if (mode === 'medium') {
+    snowInterval = setInterval(() => createSnowflake(true, 0.5), 50);
+  } else if (mode === 'fast') {
+    snowInterval = setInterval(() => createSnowflake(true, 1), 25);
+  }
 }
 
-// "Ready to Ride" box — gentle snowfall
-const registerBlock = document.querySelector('.register-block');
-if (registerBlock) {
-  registerBlock.addEventListener('mouseenter', () => startSnow('normal'));
-  registerBlock.addEventListener('mouseleave', stopSnow);
-}
-
-// "Trip Coming Soon" button — fast + sideways
+// Track mouse proximity to the button to ramp up intensity smoothly
 const btnDisabled = document.querySelector('.btn-disabled');
-if (btnDisabled) {
-  btnDisabled.addEventListener('mouseenter', () => startSnow('fast'));
-  btnDisabled.addEventListener('mouseleave', stopSnow);
+const registerBlock = document.querySelector('.register-block');
+
+// Proximity-based intensity on mouse move within the register block area
+if (registerBlock && btnDisabled) {
+  registerBlock.addEventListener('mouseenter', () => {
+    setSnowMode('normal');
+  });
+
+  registerBlock.addEventListener('mouseleave', (e) => {
+    // Only stop if not going into the button
+    if (!btnDisabled.contains(e.relatedTarget)) {
+      setSnowMode('off');
+    }
+  });
+
+  // As mouse moves within register block, check distance to button
+  registerBlock.addEventListener('mousemove', (e) => {
+    const btnRect = btnDisabled.getBoundingClientRect();
+    const btnCenterX = btnRect.left + btnRect.width / 2;
+    const btnCenterY = btnRect.top + btnRect.height / 2;
+    const distance = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
+
+    // Ramp up as you get within 200px of the button center
+    if (distance < 60) {
+      setSnowMode('fast');
+    } else if (distance < 70) {
+      setSnowMode('medium');
+    } else {
+      setSnowMode('normal');
+    }
+  });
+
+  btnDisabled.addEventListener('mouseenter', () => {
+    setSnowMode('fast');
+  });
+
+  btnDisabled.addEventListener('mouseleave', (e) => {
+    // If going back into register block, drop to normal — don't stop
+    if (registerBlock.contains(e.relatedTarget)) {
+      setSnowMode('normal');
+    } else {
+      setSnowMode('off');
+    }
+  });
 }
 </script>
 </body>
