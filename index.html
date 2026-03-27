@@ -303,6 +303,34 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   .lightbox-img { max-width: 96vw; max-height: 80vh; }
   .lightbox-close { top: 14px; right: 16px; font-size: 28px; }
 }
+
+/* SNOWFLAKE EFFECT */
+.snowflake {
+  position: fixed;
+  top: -20px;
+  color: var(--white);
+  font-size: 1.2em;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  animation: snowfall linear forwards;
+  user-select: none;
+}
+@keyframes snowfall {
+  0%   { transform: translateY(0) rotate(0deg);   opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+.snowflake-sideways {
+  animation: snowfall-sideways linear forwards;
+}
+@keyframes snowfall-sideways {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; }
+  100% { transform: translateY(110vh) translateX(var(--drift)) rotate(540deg); opacity: 0; }
+}
+@keyframes snowfall {
+  0%   { transform: translateY(0) rotate(0deg);   opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
 </style>
 </head>
 <body>
@@ -775,6 +803,60 @@ document.querySelectorAll('.trip-section').forEach(section => {
     item.addEventListener('click', () => openLightbox(photos, i, trip));
   });
 });
+
+// SNOWFLAKE EFFECT
+let snowInterval = null;
+let currentDensity = 0;
+
+function createSnowflake(sideways = false) {
+  const flake = document.createElement('div');
+  flake.classList.add('snowflake');
+  flake.innerHTML = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
+  flake.style.left = Math.random() * 100 + 'vw';
+  flake.style.fontSize = (Math.random() * 1.2 + 0.6) + 'em';
+  flake.style.opacity = Math.random() * 0.7 + 0.3;
+
+  if (sideways) {
+    // Faster + drifting sideways for button hover
+    const duration = (Math.random() * 2 + 1.5) + 's';
+    const drift = (Math.random() * 120 + 60) * (Math.random() > 0.5 ? 1 : -1);
+    flake.style.animationDuration = duration;
+    flake.style.setProperty('--drift', drift + 'px');
+    flake.classList.add('snowflake-sideways');
+  } else {
+    flake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+  }
+
+  document.body.appendChild(flake);
+  setTimeout(() => flake.remove(), 5000);
+}
+
+function startSnow(mode = 'normal') {
+  stopSnow();
+  const interval = mode === 'fast' ? 30 : 80;
+  const sideways = mode === 'fast';
+  snowInterval = setInterval(() => createSnowflake(sideways), interval);
+}
+
+function stopSnow() {
+  clearInterval(snowInterval);
+  snowInterval = null;
+  document.querySelectorAll('.snowflake').forEach(f => f.remove());
+}
+
+// "Ready to Ride" box — gentle snowfall
+const registerBlock = document.querySelector('.register-block');
+if (registerBlock) {
+  registerBlock.addEventListener('mouseenter', () => startSnow('normal'));
+  registerBlock.addEventListener('mouseleave', stopSnow);
+}
+
+// "Trip Coming Soon" button — fast + sideways
+const btnDisabled = document.querySelector('.btn-disabled');
+if (btnDisabled) {
+  btnDisabled.addEventListener('mouseenter', () => startSnow('fast'));
+  btnDisabled.addEventListener('mouseleave', stopSnow);
+}
 </script>
 </body>
 </html>
