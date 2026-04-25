@@ -663,20 +663,21 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
       <a href="https://instagram.com/ksu_ski_snow_alumni" class="instagram-link" target="_blank">Follow on Instagram →</a>
     </div>
     <div class="fade-in">
-      <div class="contact-form-fields">
+      <form class="contact-form-fields" method="POST" data-netlify="true" name="contact">
+        <input type="hidden" name="form-name" value="contact">
         <div class="form-row">
-          <div class="form-field"><label>First Name</label><input type="text" placeholder="Your first name" autocomplete="given-name"></div>
-          <div class="form-field"><label>Last Name</label><input type="text" placeholder="Your last name" autocomplete="family-name"></div>
+          <div class="form-field"><label>First Name</label><input type="text" name="first-name" placeholder="Your first name" autocomplete="given-name"></div>
+          <div class="form-field"><label>Last Name</label><input type="text" name="last-name" placeholder="Your last name" autocomplete="family-name"></div>
         </div>
-        <div class="form-field"><label>Email Address</label><input type="email" placeholder="you@email.com" autocomplete="email"></div>
-        <div class="form-field"><label>Graduation Year</label><input type="text" placeholder="e.g. 2019" autocomplete="off"></div>
+        <div class="form-field"><label>Email Address</label><input type="email" name="email" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="form-field"><label>Graduation Year</label><input type="text" name="graduation-year" placeholder="e.g. 2019" autocomplete="off"></div>
         <div class="form-field">
           <label>I'm interested in...</label>
-          <select><option>The Annual Ski Trip</option><option>General Club Info</option><option>Volunteering / Organizing</option><option>Something Else</option></select>
+          <select name="interest"><option>The Annual Ski Trip</option><option>General Club Info</option><option>Volunteering / Organizing</option><option>Something Else</option></select>
         </div>
-        <div class="form-field"><label>Message</label><textarea placeholder="Any questions or comments..."></textarea></div>
-        <button class="btn-primary" type="button" style="align-self:flex-start;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;">Send Message →</button>
-      </div>
+        <div class="form-field"><label>Message</label><textarea name="message" placeholder="Any questions or comments..."></textarea></div>
+        <button class="btn-primary" type="submit" style="align-self:flex-start;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;">Send Message →</button>
+      </form>
     </div>
   </div>
 </section>
