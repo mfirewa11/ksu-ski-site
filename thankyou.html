@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message Sent — KSU Alumni Ski & Snowboard Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808;
+  --white: #f5f2ed;
+  --blue: #2a7fff;
+  --gold: #e8b84b;
+  --white-10: rgba(245,242,237,0.1);
+  --white-20: rgba(245,242,237,0.2);
+  --white-40: rgba(245,242,237,0.68);
+  --white-60: rgba(245,242,237,0.85);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* NAV */
+nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,8,8,0.93); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(232,184,75,0.18); }
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo img { height: 40px; width: 40px; border-radius: 50%; border: 1px solid rgba(232,184,75,0.3); }
+.nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { color: var(--white-40); text-decoration: none; font-size: 12px; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.25s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { color: var(--black) !important; background: var(--gold); padding: 9px 22px; font-size: 11px !important; font-weight: 500 !important; letter-spacing: 1.5px !important; border: 1px solid var(--gold); transition: all 0.25s !important; }
+.nav-cta:hover { background: transparent !important; color: var(--gold) !important; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile-drawer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8,8,8,0.98); z-index: 190; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+.nav-mobile-drawer.open { display: flex; }
+.nav-mobile-drawer a { color: var(--white-40); text-decoration: none; font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 4px; text-transform: uppercase; transition: color 0.25s; }
+.nav-mobile-drawer a:hover { color: var(--gold); }
+.nav-mobile-drawer .nav-cta { color: var(--black) !important; background: var(--gold); padding: 12px 36px; font-size: 18px !important; }
+
+/* MAIN */
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 140px 52px 80px; }
+.thankyou-card { max-width: 580px; width: 100%; text-align: center; }
+.thankyou-icon { width: 64px; height: 64px; border: 1px solid rgba(232,184,75,0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; background: rgba(232,184,75,0.06); }
+.thankyou-icon svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.eyebrow { font-size: 13px; font-weight: 500; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+.thankyou-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 96px); line-height: 0.95; letter-spacing: 2px; color: var(--white); margin-bottom: 24px; }
+.thankyou-heading em { color: var(--gold); font-style: normal; }
+.accent-line { width: 48px; height: 2px; background: var(--gold); margin: 0 auto 28px; opacity: 0.7; }
+.thankyou-body { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 18px; color: var(--white-40); line-height: 1.75; margin-bottom: 44px; }
+.btn-primary { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 14px 36px; text-decoration: none; transition: all 0.25s; border: 1px solid var(--gold); display: inline-block; }
+.btn-primary:hover { background: transparent; color: var(--gold); }
+
+/* FOOTER */
+footer { padding: 28px 52px; border-top: 1px solid rgba(232,184,75,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white-40); }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 3px; color: var(--white-40); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  main { padding: 120px 24px 60px; }
+  footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="images/kent_alumni_logo_final.png" alt="KSU Alumni Ski Club">
+    <span class="nav-logo-text">KSU Alumni Ski & Snowboard</span>
+  </a>
+  <div class="nav-links">
+    <a href="/#trip">The Trip</a>
+    <a href="/#about">About</a>
+    <a href="/#gallery">Gallery</a>
+    <a href="/#faq">FAQ</a>
+    <a href="/#contact">Contact</a>
+    <a href="/#trip" class="nav-cta">Register</a>
+  </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-mobile-drawer" id="navDrawer">
+  <a href="/#trip">The Trip</a>
+  <a href="/#about">About</a>
+  <a href="/#gallery">Gallery</a>
+  <a href="/#faq">FAQ</a>
+  <a href="/#contact">Contact</a>
+  <a href="/#trip" class="nav-cta">Register</a>
+</div>
+
+<!-- MAIN -->
+<main>
+  <div class="thankyou-card">
+    <div class="thankyou-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <span class="eyebrow">Message Received</span>
+    <h1 class="thankyou-heading">We'll Be In <em>Touch</em></h1>
+    <div class="accent-line"></div>
+    <p class="thankyou-body">Thanks for reaching out — we've got your message and will get back to you soon. In the meantime, follow us on Instagram for trip updates and announcements.</p>
+    <a href="/" class="btn-primary">Back to Home →</a>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 KSU Alumni Ski & Snowboard Club</p>
+  <span class="footer-logo">KSU Ski & Snowboard</span>
+  <p>Follow us @ksu_ski_snow_alumni</p>
+</footer>
+
+<script>
+const hamburger = document.getElementById('navHamburger');
+const drawer = document.getElementById('navDrawer');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  drawer.classList.toggle('open');
+});
+drawer.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>
