@@ -20,6 +20,8 @@
 <meta name="description" content="KSU Alumni Ski & Snowboard Club — one trip a year with KSU alumni, friends, and family. Join us for the annual ski trip to the best mountains in the country.">
 
 <title>KSU Alumni Ski & Snowboard Club</title>
+<link rel="icon" type="image/png" href="images/kent_alumni_logo_final.png">
+<link rel="apple-touch-icon" href="images/kent_alumni_logo_final.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -50,6 +52,16 @@ nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; di
 .nav-links a:hover { color: var(--gold); }
 .nav-cta { color: var(--black) !important; background: var(--gold); padding: 9px 22px; font-size: 11px !important; font-weight: 500 !important; letter-spacing: 1.5px !important; border: 1px solid var(--gold); transition: all 0.25s !important; }
 .nav-cta:hover { background: transparent !important; color: var(--gold) !important; }
+/* Destinations dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown > a { display: flex; align-items: center; gap: 5px; }
+.nav-dropdown > a::after { content: ''; display: inline-block; width: 6px; height: 6px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.2s; }
+.nav-dropdown:hover > a::after { transform: rotate(-135deg) translateY(-2px); }
+.nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: rgba(8,8,8,0.97); border: 1px solid rgba(232,184,75,0.18); min-width: 180px; padding: 20px 0 8px; }
+.nav-dropdown-menu::before { content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu a { display: block; padding: 10px 20px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white-60); text-decoration: none; white-space: nowrap; transition: color 0.2s, background 0.2s; }
+.nav-dropdown-menu a:hover { color: var(--gold); background: rgba(232,184,75,0.06); }
 /* Hamburger */
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
 .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
@@ -130,7 +142,7 @@ nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; di
 .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 46px; letter-spacing: 1px; color: var(--gold); line-height: 1; }
 .stat-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--white-40); margin-top: 6px; }
 .destinations { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px; }
-.dest-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-40); padding: 6px 14px; border: 1px solid rgba(245,242,237,0.1); transition: all 0.25s; cursor: default; }
+.dest-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-40); padding: 6px 14px; border: 1px solid rgba(245,242,237,0.1); transition: all 0.25s; text-decoration: none; display: inline-block; }
 .dest-tag:hover { border-color: var(--blue); color: var(--blue); }
 
 /* GALLERY */
@@ -139,7 +151,8 @@ nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; di
 .gallery-header-right p { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 16px; color: var(--white-40); text-align: right; line-height: 1.6; }
 .trip-section { margin-bottom: 72px; }
 .trip-section-header { padding: 0 52px; margin-bottom: 18px; display: flex; align-items: center; gap: 18px; }
-.trip-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; color: var(--white); white-space: nowrap; }
+.trip-section-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; color: var(--white); white-space: nowrap; text-decoration: none; transition: color 0.25s; }
+.trip-section-title:hover { color: var(--gold); }
 .trip-section-date { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
 .trip-section-rule { flex: 1; height: 1px; background: rgba(232,184,75,0.15); }
 .photo-grid { padding: 0 52px; display: grid; gap: 3px; }
@@ -162,7 +175,8 @@ nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; di
 /* LIGHTBOX */
 .lightbox { position: fixed; inset: 0; background: rgba(8,8,8,0.97); z-index: 1000; display: none; align-items: center; justify-content: center; }
 .lightbox.active { display: flex; }
-.lightbox-img { max-width: 88vw; max-height: 86vh; object-fit: contain; display: block; }
+.lightbox-img { max-width: 88vw; max-height: 86vh; object-fit: contain; display: block; user-select: none; -webkit-user-drag: none; }
+.lightbox-img-behind { max-width: 88vw; max-height: 86vh; object-fit: contain; display: none; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none; user-select: none; }
 .lightbox-close { position: absolute; top: 24px; right: 32px; background: none; border: none; color: var(--white-60); font-size: 36px; cursor: pointer; transition: color 0.2s; line-height: 1; font-weight: 300; }
 .lightbox-close:hover { color: var(--gold); }
 .lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(232,184,75,0.12); border: 1px solid rgba(232,184,75,0.3); color: var(--white); font-size: 20px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
@@ -379,6 +393,15 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
     <a href="#trip">The Trip</a>
     <a href="#about">About</a>
     <a href="#gallery">Gallery</a>
+    <div class="nav-dropdown">
+      <a href="#">Destinations</a>
+      <div class="nav-dropdown-menu">
+        <a href="aspen-snowmass.html">Aspen / Snowmass</a>
+        <a href="crested-butte.html">Crested Butte</a>
+        <a href="jackson-hole.html">Jackson Hole</a>
+        <a href="telluride.html">Telluride</a>
+      </div>
+    </div>
     <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
     <a href="#trip" class="nav-cta">Register</a>
@@ -393,6 +416,10 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <a href="#trip" class="nav-drawer-link">The Trip</a>
   <a href="#about" class="nav-drawer-link">About</a>
   <a href="#gallery" class="nav-drawer-link">Gallery</a>
+  <a href="aspen-snowmass.html" class="nav-drawer-link">Aspen / Snowmass</a>
+  <a href="crested-butte.html" class="nav-drawer-link">Crested Butte</a>
+  <a href="jackson-hole.html" class="nav-drawer-link">Jackson Hole</a>
+  <a href="telluride.html" class="nav-drawer-link">Telluride</a>
   <a href="#faq" class="nav-drawer-link">FAQ</a>
   <a href="#contact" class="nav-drawer-link">Contact</a>
   <a href="#trip" class="nav-cta nav-drawer-link">Register</a>
@@ -482,10 +509,10 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
         <div class="stat-block"><div class="stat-num">∞</div><div class="stat-label">Powder days ahead</div></div>
       </div>
       <div class="destinations">
-        <span class="dest-tag">Telluride</span>
-        <span class="dest-tag">Jackson Hole</span>
-        <span class="dest-tag">Crested Butte</span>
-        <span class="dest-tag">Aspen / Snowmass</span>
+        <a href="telluride.html" class="dest-tag">Telluride</a>
+        <a href="jackson-hole.html" class="dest-tag">Jackson Hole</a>
+        <a href="crested-butte.html" class="dest-tag">Crested Butte</a>
+        <a href="aspen-snowmass.html" class="dest-tag">Aspen / Snowmass</a>
       </div>
     </div>
   </div>
@@ -506,7 +533,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <!-- TELLURIDE '22 -->
   <div class="trip-section fade-in" data-trip="Telluride '22">
     <div class="trip-section-header">
-      <span class="trip-section-title">Telluride '22</span>
+      <a href="telluride.html" class="trip-section-title">Telluride '22</a>
       <span class="trip-section-date">Jan 2–7, 2022</span>
       <div class="trip-section-rule"></div>
     </div>
@@ -532,7 +559,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <!-- JACKSON HOLE '23 -->
   <div class="trip-section fade-in" data-trip="Jackson Hole '23">
     <div class="trip-section-header">
-      <span class="trip-section-title">Jackson Hole '23</span>
+      <a href="jackson-hole.html" class="trip-section-title">Jackson Hole '23</a>
       <span class="trip-section-date">Jan 2–7, 2023</span>
       <div class="trip-section-rule"></div>
     </div>
@@ -557,7 +584,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <!-- CRESTED BUTTE '24 -->
   <div class="trip-section fade-in" data-trip="Crested Butte '24">
     <div class="trip-section-header">
-      <span class="trip-section-title">Crested Butte '24</span>
+      <a href="crested-butte.html" class="trip-section-title">Crested Butte '24</a>
       <span class="trip-section-date">Jan 7–12, 2024</span>
       <div class="trip-section-rule"></div>
     </div>
@@ -584,7 +611,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <!-- ASPEN / SNOWMASS '25 -->
   <div class="trip-section fade-in" data-trip="Aspen / Snowmass '25">
     <div class="trip-section-header">
-      <span class="trip-section-title">Aspen / Snowmass '25</span>
+      <a href="aspen-snowmass.html" class="trip-section-title">Aspen / Snowmass '25</a>
       <span class="trip-section-date">Jan 5–10, 2025</span>
       <div class="trip-section-rule"></div>
     </div>
@@ -616,7 +643,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <!-- JACKSON HOLE '26 -->
   <div class="trip-section fade-in" data-trip="Jackson Hole '26">
     <div class="trip-section-header">
-      <span class="trip-section-title">Jackson Hole '26</span>
+      <a href="jackson-hole.html" class="trip-section-title">Jackson Hole '26</a>
       <span class="trip-section-date">Jan 4–9, 2026</span>
       <div class="trip-section-rule"></div>
     </div>
@@ -721,6 +748,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <button class="lightbox-close" id="lightboxClose">×</button>
   <button class="lightbox-prev" id="lightboxPrev">&#8592;</button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <img class="lightbox-img-behind" id="lightboxImgBehind" src="" alt="">
   <button class="lightbox-next" id="lightboxNext">&#8594;</button>
   <span class="lightbox-counter" id="lightboxCounter"></span>
 </div>
@@ -806,12 +834,16 @@ let currentPhotos = [], currentIndex = 0, currentTrip = '';
 function openLightbox(photos, index, trip) {
   currentPhotos = photos; currentIndex = index; currentTrip = trip;
   updateLightbox();
+  document.getElementById('lightboxImgBehind').style.display = 'none';
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
 function updateLightbox() {
-  document.getElementById('lightboxImg').src = currentPhotos[currentIndex];
+  const img = document.getElementById('lightboxImg');
+  img.style.transition = '';
+  img.style.transform = '';
+  img.src = currentPhotos[currentIndex];
   document.getElementById('lightboxTrip').textContent = currentTrip;
   document.getElementById('lightboxCounter').textContent = (currentIndex + 1) + ' / ' + currentPhotos.length;
 }
@@ -832,6 +864,62 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length; updateLightbox(); }
   if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentPhotos.length; updateLightbox(); }
 });
+
+// Lightbox swipe with animation
+let swipeTouchStartX = 0, swipeTouchStartY = 0, lbSwipeActive = false, lbSwipeDir = 0;
+const lbEl = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightboxImg');
+const lbImgBehind = document.getElementById('lightboxImgBehind');
+lbEl.addEventListener('touchstart', e => {
+  swipeTouchStartX = e.touches[0].clientX;
+  swipeTouchStartY = e.touches[0].clientY;
+  lbSwipeActive = false; lbSwipeDir = 0;
+}, { passive: true });
+lbEl.addEventListener('touchmove', e => {
+  if (!lbEl.classList.contains('active')) return;
+  const dx = e.touches[0].clientX - swipeTouchStartX;
+  const dy = e.touches[0].clientY - swipeTouchStartY;
+  if (!lbSwipeActive) {
+    if (Math.abs(dx) < 8 || Math.abs(dy) > Math.abs(dx)) return;
+    lbSwipeActive = true;
+    lbSwipeDir = dx < 0 ? 1 : -1;
+    const bi = lbSwipeDir === 1 ? (currentIndex + 1) % currentPhotos.length : (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+    lbImgBehind.src = currentPhotos[bi];
+    lbImgBehind.style.display = 'block';
+    lbImg.style.transition = 'none';
+    lbImgBehind.style.transition = 'none';
+  }
+  const W = window.innerWidth;
+  lbImg.style.transform = `translateX(${dx}px)`;
+  lbImgBehind.style.transform = `translate(calc(-50% + ${(lbSwipeDir === 1 ? W : -W) + dx}px), -50%)`;
+}, { passive: true });
+lbEl.addEventListener('touchend', e => {
+  if (!lbSwipeActive) return;
+  lbSwipeActive = false;
+  const dx = e.changedTouches[0].clientX - swipeTouchStartX;
+  const W = window.innerWidth;
+  lbImg.style.transition = 'transform 0.28s ease';
+  lbImgBehind.style.transition = 'transform 0.28s ease';
+  if (Math.abs(dx) >= 80) {
+    lbImg.style.transform = `translateX(${lbSwipeDir === 1 ? -W : W}px)`;
+    lbImgBehind.style.transform = 'translate(-50%, -50%)';
+    setTimeout(() => {
+      currentIndex = (currentIndex + lbSwipeDir + currentPhotos.length) % currentPhotos.length;
+      updateLightbox();
+      lbImgBehind.style.display = 'none';
+      lbImgBehind.style.transform = 'translate(-50%, -50%)';
+    }, 290);
+  } else {
+    lbImg.style.transform = 'translateX(0)';
+    lbImgBehind.style.transform = `translate(calc(-50% + ${lbSwipeDir === 1 ? W : -W}px), -50%)`;
+    setTimeout(() => {
+      lbImgBehind.style.display = 'none';
+      lbImg.style.transform = '';
+      lbImg.style.transition = '';
+      lbImgBehind.style.transition = '';
+    }, 290);
+  }
+}, { passive: true });
 
 document.querySelectorAll('.trip-section').forEach(section => {
   const trip = section.dataset.trip;

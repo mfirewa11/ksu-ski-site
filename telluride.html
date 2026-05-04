@@ -20,6 +20,8 @@
 <meta name="description" content="KSU Alumni Ski & Snowboard Club's founding alumni ski trip to Telluride, Colorado — January 2022. 40+ Kent State alumni for the first-ever group ski trip Telluride. See photos, trip details, and how to join the next KSU alumni ski trip.">
 
 <title>Telluride Ski Trip | KSU Alumni Ski & Snowboard Club</title>
+<link rel="icon" type="image/png" href="images/kent_alumni_logo_final.png">
+<link rel="apple-touch-icon" href="images/kent_alumni_logo_final.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -51,6 +53,16 @@ nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; di
 .nav-links a.nav-active { color: var(--gold); }
 .nav-cta { color: var(--black) !important; background: var(--gold); padding: 9px 22px; font-size: 11px !important; font-weight: 500 !important; letter-spacing: 1.5px !important; border: 1px solid var(--gold); transition: all 0.25s !important; }
 .nav-cta:hover { background: transparent !important; color: var(--gold) !important; }
+.nav-dropdown { position: relative; }
+.nav-dropdown > a { display: flex; align-items: center; gap: 5px; }
+.nav-dropdown > a::after { content: ''; display: inline-block; width: 6px; height: 6px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform 0.2s; }
+.nav-dropdown:hover > a::after { transform: rotate(-135deg) translateY(-2px); }
+.nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: rgba(8,8,8,0.97); border: 1px solid rgba(232,184,75,0.18); min-width: 180px; padding: 20px 0 8px; }
+.nav-dropdown-menu::before { content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px; }
+.nav-dropdown:hover .nav-dropdown-menu { display: block; }
+.nav-dropdown-menu a { display: block; padding: 10px 20px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white-60); text-decoration: none; white-space: nowrap; transition: color 0.2s, background 0.2s; }
+.nav-dropdown-menu a:hover { color: var(--gold); background: rgba(232,184,75,0.06); }
+.nav-dropdown-menu a.nav-active { color: var(--gold); }
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
 .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -177,7 +189,8 @@ nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; di
 /* LIGHTBOX */
 .lightbox { position: fixed; inset: 0; background: rgba(8,8,8,0.97); z-index: 1000; display: none; align-items: center; justify-content: center; }
 .lightbox.active { display: flex; }
-.lightbox-img { max-width: 88vw; max-height: 86vh; object-fit: contain; display: block; }
+.lightbox-img { max-width: 88vw; max-height: 86vh; object-fit: contain; display: block; user-select: none; -webkit-user-drag: none; }
+.lightbox-img-behind { max-width: 88vw; max-height: 86vh; object-fit: contain; display: none; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none; user-select: none; }
 .lightbox-close { position: absolute; top: 24px; right: 32px; background: none; border: none; color: var(--white-60); font-size: 36px; cursor: pointer; transition: color 0.2s; line-height: 1; font-weight: 300; }
 .lightbox-close:hover { color: var(--gold); }
 .lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(232,184,75,0.12); border: 1px solid rgba(232,184,75,0.3); color: var(--white); font-size: 20px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
@@ -310,9 +323,17 @@ footer a:hover { color: var(--gold); }
     <a href="/#trip">The Trip</a>
     <a href="/#about">About</a>
     <a href="/#gallery">Gallery</a>
+    <div class="nav-dropdown">
+      <a href="#" class="nav-active">Destinations</a>
+      <div class="nav-dropdown-menu">
+        <a href="aspen-snowmass.html">Aspen / Snowmass</a>
+        <a href="crested-butte.html">Crested Butte</a>
+        <a href="jackson-hole.html">Jackson Hole</a>
+        <a href="telluride.html" class="nav-active">Telluride</a>
+      </div>
+    </div>
     <a href="/#faq">FAQ</a>
     <a href="/#contact">Contact</a>
-    <a href="#" class="nav-active">Destinations</a>
     <a href="/#trip" class="nav-cta">Register</a>
   </div>
   <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
@@ -325,9 +346,12 @@ footer a:hover { color: var(--gold); }
   <a href="/#trip" class="nav-drawer-link">The Trip</a>
   <a href="/#about" class="nav-drawer-link">About</a>
   <a href="/#gallery" class="nav-drawer-link">Gallery</a>
+  <a href="aspen-snowmass.html" class="nav-drawer-link">Aspen / Snowmass</a>
+  <a href="crested-butte.html" class="nav-drawer-link">Crested Butte</a>
+  <a href="jackson-hole.html" class="nav-drawer-link">Jackson Hole</a>
+  <a href="telluride.html" class="nav-drawer-link" style="color:var(--gold);">Telluride</a>
   <a href="/#faq" class="nav-drawer-link">FAQ</a>
   <a href="/#contact" class="nav-drawer-link">Contact</a>
-  <a href="#" class="nav-drawer-link" style="color:var(--gold);">Destinations</a>
   <a href="/#trip" class="nav-cta nav-drawer-link">Register</a>
 </div>
 
@@ -548,6 +572,7 @@ footer a:hover { color: var(--gold); }
   <button class="lightbox-close" id="lightboxClose">×</button>
   <button class="lightbox-prev" id="lightboxPrev">&#8592;</button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <img class="lightbox-img-behind" id="lightboxImgBehind" src="" alt="">
   <button class="lightbox-next" id="lightboxNext">&#8594;</button>
   <span class="lightbox-counter" id="lightboxCounter"></span>
 </div>
@@ -600,10 +625,11 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 let currentPhotos = [], currentIndex = 0, currentTrip = '';
 function openLightbox(photos, index, trip) {
   currentPhotos = photos; currentIndex = index; currentTrip = trip;
-  updateLightbox(); document.getElementById('lightbox').classList.add('active'); document.body.style.overflow = 'hidden';
+  updateLightbox(); document.getElementById('lightboxImgBehind').style.display = 'none'; document.getElementById('lightbox').classList.add('active'); document.body.style.overflow = 'hidden';
 }
 function updateLightbox() {
-  document.getElementById('lightboxImg').src = currentPhotos[currentIndex];
+  const img = document.getElementById('lightboxImg');
+  img.style.transition = ''; img.style.transform = ''; img.src = currentPhotos[currentIndex];
   document.getElementById('lightboxTrip').textContent = currentTrip;
   document.getElementById('lightboxCounter').textContent = (currentIndex + 1) + ' / ' + currentPhotos.length;
 }
@@ -618,6 +644,63 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length; updateLightbox(); }
   if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentPhotos.length; updateLightbox(); }
 });
+
+// Lightbox swipe with animation
+let swipeTouchStartX = 0, swipeTouchStartY = 0, lbSwipeActive = false, lbSwipeDir = 0;
+const lbEl = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightboxImg');
+const lbImgBehind = document.getElementById('lightboxImgBehind');
+lbEl.addEventListener('touchstart', e => {
+  swipeTouchStartX = e.touches[0].clientX;
+  swipeTouchStartY = e.touches[0].clientY;
+  lbSwipeActive = false; lbSwipeDir = 0;
+}, { passive: true });
+lbEl.addEventListener('touchmove', e => {
+  if (!lbEl.classList.contains('active')) return;
+  const dx = e.touches[0].clientX - swipeTouchStartX;
+  const dy = e.touches[0].clientY - swipeTouchStartY;
+  if (!lbSwipeActive) {
+    if (Math.abs(dx) < 8 || Math.abs(dy) > Math.abs(dx)) return;
+    lbSwipeActive = true;
+    lbSwipeDir = dx < 0 ? 1 : -1;
+    const bi = lbSwipeDir === 1 ? (currentIndex + 1) % currentPhotos.length : (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+    lbImgBehind.src = currentPhotos[bi];
+    lbImgBehind.style.display = 'block';
+    lbImg.style.transition = 'none';
+    lbImgBehind.style.transition = 'none';
+  }
+  const W = window.innerWidth;
+  lbImg.style.transform = `translateX(${dx}px)`;
+  lbImgBehind.style.transform = `translate(calc(-50% + ${(lbSwipeDir === 1 ? W : -W) + dx}px), -50%)`;
+}, { passive: true });
+lbEl.addEventListener('touchend', e => {
+  if (!lbSwipeActive) return;
+  lbSwipeActive = false;
+  const dx = e.changedTouches[0].clientX - swipeTouchStartX;
+  const W = window.innerWidth;
+  lbImg.style.transition = 'transform 0.28s ease';
+  lbImgBehind.style.transition = 'transform 0.28s ease';
+  if (Math.abs(dx) >= 80) {
+    lbImg.style.transform = `translateX(${lbSwipeDir === 1 ? -W : W}px)`;
+    lbImgBehind.style.transform = 'translate(-50%, -50%)';
+    setTimeout(() => {
+      currentIndex = (currentIndex + lbSwipeDir + currentPhotos.length) % currentPhotos.length;
+      updateLightbox();
+      lbImgBehind.style.display = 'none';
+      lbImgBehind.style.transform = 'translate(-50%, -50%)';
+    }, 290);
+  } else {
+    lbImg.style.transform = 'translateX(0)';
+    lbImgBehind.style.transform = `translate(calc(-50% + ${lbSwipeDir === 1 ? W : -W}px), -50%)`;
+    setTimeout(() => {
+      lbImgBehind.style.display = 'none';
+      lbImg.style.transform = '';
+      lbImg.style.transition = '';
+      lbImgBehind.style.transition = '';
+    }, 290);
+  }
+}, { passive: true });
+
 document.querySelectorAll('.trip-section').forEach(section => {
   const trip = section.dataset.trip;
   const items = Array.from(section.querySelectorAll('.photo-item'));
