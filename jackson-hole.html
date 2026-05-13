@@ -334,6 +334,24 @@ footer a:hover { color: var(--gold); }
   .hero-title { font-size: clamp(44px, 13vw, 64px); }
   .section-heading { font-size: clamp(32px, 9vw, 44px); }
 }
+/* PHOTO HEARTS */
+.photo-heart { position: absolute; bottom: 10px; left: 10px; display: flex; align-items: center; gap: 5px; z-index: 5; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.photo-item:hover .photo-heart, .photo-heart.has-likes { opacity: 1; }
+.heart-btn { background: rgba(8,8,8,0.55); border: none; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; padding: 0; flex-shrink: 0; pointer-events: auto; }
+.heart-btn svg { width: 14px; height: 14px; stroke: var(--white); fill: none; stroke-width: 2.2; transition: stroke 0.2s, fill 0.2s; }
+.heart-btn.liked svg { stroke: #ff4d6d; fill: #ff4d6d; }
+@keyframes heartPop { 0% { transform: scale(1); } 30% { transform: scale(1.55); } 60% { transform: scale(0.88); } 100% { transform: scale(1); } }
+.heart-btn.pop { animation: heartPop 0.35s ease forwards; }
+@keyframes dtHeartPop { 0% { transform: translate(-50%,-50%) scale(0); opacity:1; } 40% { transform: translate(-50%,-50%) scale(1.25); opacity:1; } 70% { transform: translate(-50%,-50%) scale(1.05); opacity:1; } 100% { transform: translate(-50%,-50%) scale(1); opacity:0; } }
+.dt-heart { position: absolute; pointer-events: none; z-index: 20; animation: dtHeartPop 0.7s ease forwards; }
+.dt-heart svg { width: 72px; height: 72px; fill: #ff4d6d; filter: drop-shadow(0 2px 14px rgba(255,77,109,0.65)); }
+.heart-count { font-size: 11px; color: var(--white); font-weight: 500; letter-spacing: 0.5px; text-shadow: 0 1px 3px rgba(0,0,0,0.9); min-width: 10px; line-height: 1; }
+.lightbox-heart { position: absolute; bottom: 22px; left: 32px; display: flex; align-items: center; gap: 8px; }
+.lightbox-heart .heart-btn { background: none; width: 40px; height: 40px; }
+.lightbox-heart .heart-btn svg { width: 22px; height: 22px; stroke: var(--white-60); }
+.lightbox-heart .heart-btn.liked svg { stroke: #ff4d6d; fill: #ff4d6d; }
+.lightbox-heart .heart-count { font-size: 14px; color: var(--white-60); font-weight: 300; letter-spacing: 1px; min-width: 14px; text-shadow: none; }
+@media (max-width: 600px) { .lightbox-heart { left: 16px; bottom: 16px; } }
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G0EB8L2J8D"></script>
@@ -651,8 +669,28 @@ footer a:hover { color: var(--gold); }
   <img class="lightbox-img-behind" id="lightboxImgBehind" src="" alt="">
   <button class="lightbox-next" id="lightboxNext">&#8594;</button>
   <span class="lightbox-counter" id="lightboxCounter"></span>
+  <div class="lightbox-heart" id="lightboxHeart">
+    <button class="heart-btn" id="lightboxHeartBtn" aria-label="Like photo"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+    <span class="heart-count" id="lightboxHeartCount"></span>
+  </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCep9I5oy_yGoj_z9TsnIeT5Xx52bID-ik",
+  authDomain: "ksu-ski-site.firebaseapp.com",
+  databaseURL: "https://ksu-ski-site-default-rtdb.firebaseio.com",
+  projectId: "ksu-ski-site",
+  storageBucket: "ksu-ski-site.firebasestorage.app",
+  messagingSenderId: "1010172087407",
+  appId: "1:1010172087407:web:dde1fbc5b3a4fbdeff519a"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+function photoKey(src) { return src.split('/').pop().replace(/\./g, '_'); }
+</script>
 <script>
 // Build mobile gallery strips
 function buildMobileGalleryStrips() {
@@ -735,6 +773,7 @@ function updateLightbox() {
   img.style.transform = '';
   document.getElementById('lightboxTrip').textContent = currentTrip;
   document.getElementById('lightboxCounter').textContent = (currentIndex + 1) + ' / ' + currentPhotos.length;
+  updateLightboxHeart();
 }
 
 function closeLightbox() {
@@ -817,6 +856,119 @@ document.querySelectorAll('.trip-section').forEach(section => {
   items.forEach((item, i) => {
     item.addEventListener('click', () => openLightbox(photos, i, trip));
   });
+});
+
+const heartSVG = `<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+function isLiked(key) { return !!sessionStorage.getItem('liked_' + key); }
+function markLiked(key) { sessionStorage.setItem('liked_' + key, '1'); }
+function showDoubleTapHeart(container, x, y) {
+  const el = document.createElement('div');
+  el.className = 'dt-heart';
+  el.innerHTML = `<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+  container.appendChild(el);
+  el.addEventListener('animationend', () => el.remove());
+}
+function attachGridHeart(item) {
+  const key = photoKey(item.dataset.src);
+  const heart = document.createElement('div');
+  heart.className = 'photo-heart';
+  heart.innerHTML = `<button class="heart-btn${isLiked(key) ? ' liked' : ''}" aria-label="Like photo">${heartSVG}</button><span class="heart-count"></span>`;
+  item.appendChild(heart);
+  const btn = heart.querySelector('.heart-btn');
+  const countEl = heart.querySelector('.heart-count');
+  db.ref('likes/' + key).on('value', snap => {
+    const n = snap.val() || 0;
+    countEl.textContent = n > 0 ? n : '';
+    if (n > 0) heart.classList.add('has-likes'); else heart.classList.remove('has-likes');
+  });
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    if (isLiked(key)) return;
+    markLiked(key);
+    btn.classList.add('liked');
+    void btn.offsetWidth;
+    btn.classList.remove('pop');
+    void btn.offsetWidth;
+    btn.classList.add('pop');
+    db.ref('likes/' + key).transaction(n => (n || 0) + 1);
+  });
+
+  let lastTap = 0;
+  item.addEventListener('touchend', e => {
+    if (e.changedTouches.length !== 1) return;
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      lastTap = 0;
+      const rect = item.getBoundingClientRect();
+      const t = e.changedTouches[0];
+      showDoubleTapHeart(item, t.clientX - rect.left, t.clientY - rect.top);
+      if (!isLiked(key)) {
+        markLiked(key);
+        btn.classList.add('liked');
+        void btn.offsetWidth;
+        btn.classList.remove('pop');
+        void btn.offsetWidth;
+        btn.classList.add('pop');
+        db.ref('likes/' + key).transaction(n => (n || 0) + 1);
+      }
+    } else {
+      lastTap = now;
+    }
+  }, { passive: true });
+}
+document.querySelectorAll('.photo-item[data-src]').forEach(attachGridHeart);
+let lbHeartRef = null, lbHeartOff = null;
+const lbHeartBtn = document.getElementById('lightboxHeartBtn');
+const lbHeartCount = document.getElementById('lightboxHeartCount');
+function updateLightboxHeart() {
+  const key = photoKey(currentPhotos[currentIndex]);
+  if (lbHeartOff) { lbHeartRef.off('value', lbHeartOff); }
+  lbHeartBtn.classList.toggle('liked', isLiked(key));
+  lbHeartOff = snap => {
+    const n = snap.val() || 0;
+    lbHeartCount.textContent = n > 0 ? n : '';
+  };
+  lbHeartRef = db.ref('likes/' + key);
+  lbHeartRef.on('value', lbHeartOff);
+}
+lbHeartBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const key = photoKey(currentPhotos[currentIndex]);
+  if (isLiked(key)) return;
+  markLiked(key);
+  lbHeartBtn.classList.add('liked');
+  void lbHeartBtn.offsetWidth;
+  lbHeartBtn.classList.remove('pop');
+  void lbHeartBtn.offsetWidth;
+  lbHeartBtn.classList.add('pop');
+  db.ref('likes/' + key).transaction(n => (n || 0) + 1);
+});
+
+// Lightbox double-tap to like
+let lastLbTap = 0;
+lbImg.addEventListener('touchend', e => {
+  if (lbSwipeActive) return;
+  if (e.changedTouches.length !== 1) return;
+  const now = Date.now();
+  const t = e.changedTouches[0];
+  if (now - lastLbTap < 300) {
+    lastLbTap = 0;
+    const key = photoKey(currentPhotos[currentIndex]);
+    showDoubleTapHeart(lbEl, t.clientX, t.clientY);
+    if (!isLiked(key)) {
+      markLiked(key);
+      lbHeartBtn.classList.add('liked');
+      void lbHeartBtn.offsetWidth;
+      lbHeartBtn.classList.remove('pop');
+      void lbHeartBtn.offsetWidth;
+      lbHeartBtn.classList.add('pop');
+      db.ref('likes/' + key).transaction(n => (n || 0) + 1);
+    }
+  } else {
+    lastLbTap = now;
+  }
 });
 </script>
 </body>

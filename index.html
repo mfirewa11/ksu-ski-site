@@ -5,21 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Open Graph -->
-<meta property="og:title" content="KSU Ski & Snowboard Club">
-<meta property="og:description" content="Kent State's ski &amp; snowboard club — group trips, mountain adventures, and lifelong friendships on the slopes.">
+<meta property="og:title" content="Kent State Alumni Ski Trip | KSU Club">
+<meta property="og:description" content="Join the Kent State alumni ski trip. Ohio alumni, friends &amp; family tackle the best mountains every January — all-inclusive package.">
 <meta property="og:image" content="https://ksuski.com/images/kent_alumni_logo_final.png">
 <meta property="og:url" content="https://ksuski.com">
 <meta property="og:type" content="website">
 
 <!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KSU Ski & Snowboard Club">
-<meta name="twitter:description" content="Kent State's ski &amp; snowboard club — group trips, mountain adventures, and lifelong friendships on the slopes.">
+<meta name="twitter:title" content="Kent State Alumni Ski Trip | KSU Club">
+<meta name="twitter:description" content="Join the Kent State alumni ski trip. Ohio alumni, friends &amp; family tackle the best mountains every January — all-inclusive package.">
 <meta name="twitter:image" content="https://ksuski.com/images/kent_alumni_logo_final.png">
 
-<meta name="description" content="KSU Alumni Ski & Snowboard Club — one trip a year with KSU alumni, friends, and family. Join us for the annual ski trip to the best mountains in the country.">
+<meta name="description" content="Join the Kent State alumni ski trip. Ohio alumni, friends & family tackle the best mountains every January — all-inclusive package.">
 
-<title>KSU Alumni Ski & Snowboard Club</title>
+<title>Kent State Alumni Ski Trip | KSU Club</title>
+<link rel="canonical" href="https://ksuski.com/">
 <link rel="icon" type="image/png" href="images/kent_alumni_logo_final.png">
 <link rel="apple-touch-icon" href="images/kent_alumni_logo_final.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -171,6 +172,11 @@ nav { position: fixed; top: 0; width: 100%; z-index: 200; padding: 18px 52px; di
 .photo-item-zoom svg { width: 13px; height: 13px; stroke: var(--black); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .grid-gap { height: 3px; }
 .gallery-rule { margin: 0 52px; }
+.view-all-wrap { padding: 0 52px; margin-top: 28px; text-align: center; }
+.view-all-link { font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(232,184,75,0.4); padding-bottom: 5px; transition: all 0.25s; }
+.view-all-link:hover { color: var(--white); border-bottom-color: rgba(255,255,255,0.4); }
+.lightbox-view-all { position: absolute; bottom: 22px; right: 32px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(232,184,75,0.35); padding-bottom: 2px; transition: all 0.2s; }
+.lightbox-view-all:hover { color: var(--white); border-bottom-color: rgba(255,255,255,0.4); }
 
 /* LIGHTBOX */
 .lightbox { position: fixed; inset: 0; background: rgba(8,8,8,0.97); z-index: 1000; display: none; align-items: center; justify-content: center; }
@@ -245,6 +251,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   .gallery-header { padding: 0 24px; }
   .trip-section-header { padding: 0 24px; }
   .photo-grid { padding: 0 24px; }
+  .view-all-wrap { padding: 0 24px; }
   .photo-grid.g-a { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 220px; }
   .photo-grid.g-a .photo-item.r2 { grid-row: span 1; }
   .photo-grid.g-b { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px 200px 200px; }
@@ -285,6 +292,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   #contact { padding: 64px 20px; }
   .gallery-header { padding: 0 20px; }
   .gallery-rule { margin: 0 20px; }
+  .view-all-wrap { padding: 0 20px; }
   .trip-section-header { padding: 0 20px; }
   .photo-grid { padding: 0 20px; }
 
@@ -339,6 +347,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   .lightbox-next { right: 8px; }
   .lightbox-img { max-width: 96vw; max-height: 80vh; }
   .lightbox-close { top: 14px; right: 16px; font-size: 28px; }
+  .lightbox-view-all { right: 16px; bottom: 16px; }
 }
 
 @media (max-width: 400px) {
@@ -347,6 +356,26 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   .hero-title { font-size: clamp(44px, 13vw, 64px); }
   .section-heading { font-size: clamp(32px, 9vw, 44px); }
 }
+
+/* PHOTO HEARTS */
+.photo-heart { position: absolute; bottom: 10px; left: 10px; display: flex; align-items: center; gap: 5px; z-index: 5; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.photo-item:hover .photo-heart, .photo-heart.has-likes { opacity: 1; }
+.heart-btn { background: rgba(8,8,8,0.55); border: none; cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; padding: 0; flex-shrink: 0; pointer-events: auto; }
+.heart-btn svg { width: 14px; height: 14px; stroke: var(--white); fill: none; stroke-width: 2.2; transition: stroke 0.2s, fill 0.2s; }
+.heart-btn.liked svg { stroke: #ff4d6d; fill: #ff4d6d; }
+@keyframes heartPop { 0% { transform: scale(1); } 30% { transform: scale(1.55); } 60% { transform: scale(0.88); } 100% { transform: scale(1); } }
+.heart-btn.pop { animation: heartPop 0.35s ease forwards; }
+@keyframes dtHeartPop { 0% { transform: translate(-50%,-50%) scale(0); opacity:1; } 40% { transform: translate(-50%,-50%) scale(1.25); opacity:1; } 70% { transform: translate(-50%,-50%) scale(1.05); opacity:1; } 100% { transform: translate(-50%,-50%) scale(1); opacity:0; } }
+.dt-heart { position: absolute; pointer-events: none; z-index: 20; animation: dtHeartPop 0.7s ease forwards; }
+.dt-heart svg { width: 72px; height: 72px; fill: #ff4d6d; filter: drop-shadow(0 2px 14px rgba(255,77,109,0.65)); }
+.heart-count { font-size: 11px; color: var(--white); font-weight: 500; letter-spacing: 0.5px; text-shadow: 0 1px 3px rgba(0,0,0,0.9); min-width: 10px; line-height: 1; }
+/* Lightbox heart */
+.lightbox-heart { position: absolute; bottom: 22px; left: 32px; display: flex; align-items: center; gap: 8px; }
+.lightbox-heart .heart-btn { background: none; width: 40px; height: 40px; pointer-events: auto; }
+.lightbox-heart .heart-btn svg { width: 22px; height: 22px; stroke: var(--white-60); }
+.lightbox-heart .heart-btn.liked svg { stroke: #ff4d6d; fill: #ff4d6d; }
+.lightbox-heart .heart-count { font-size: 14px; color: var(--white-60); font-weight: 300; letter-spacing: 1px; min-width: 14px; text-shadow: none; }
+@media (max-width: 600px) { .lightbox-heart { left: 16px; bottom: 16px; } }
 
 /* SNOWFLAKE EFFECT */
 .snowflake {
@@ -435,7 +464,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <span class="eyebrow">Kent State University Alumni</span>
-    <h1 class="hero-title">The Alumni<br>Ski <span>&</span><br>Snowboard Club</h1>
+    <h1 class="hero-title">Kent State<br>Alumni Ski <span>&</span><br>Snowboard Club</h1>
     <p class="hero-sub">One trip a year. The best mountains in the country. Open to all KSU alumni, friends, and family.</p>
     <div class="hero-btns">
       <a href="#trip" class="btn-primary">View the Annual Trip</a>
@@ -455,7 +484,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <div class="trip-inner">
     <div class="fade-in">
       <span class="section-tag">Annual Ski Trip</span>
-      <h2 class="section-heading">Join Us <em>on the Mountain</em></h2>
+      <h2 class="section-heading">The Annual Kent State <em>Alumni Ski Trip</em></h2>
       <div class="accent-line"></div>
       <p class="body-text">Every January we take over one of the best mountains in the country. We partner with OutsideLife to put together an all-inclusive package covering hotel and lift tickets at a price that's genuinely hard to beat anywhere else.</p>
       <div class="trip-details">
@@ -469,7 +498,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
     </div>
     <div class="fade-in">
       <div class="register-block">
-        <h3>Ready to Ride?</h3>
+        <h3>Claim Your Spot on the Annual Trip</h3>
         <p>Registration opens seasonally through our trip partner OutsideLife. Drop your info in the contact form below to stay in the loop on announcements.</p>
         <span class="btn-disabled">Trip Coming Soon</span>
       </div>
@@ -495,13 +524,15 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
     </div>
     <div class="fade-in">
       <span class="section-tag">Who We Are</span>
-      <h2 class="section-heading">Built on <em>the Mountain</em></h2>
+      <h2 class="section-heading">Kent State Alumni, <em>Built on the Mountain</em></h2>
       <div class="accent-line"></div>
       <p class="body-text">The Kent State Alumni Ski & Snowboard Club was co-founded by Andrew Shepherd and Mark Wolterman, originating from the Kent State University Ski & Snowboard Club. After graduation, the mission was simple: keep the crew together and keep shredding the gnar.</p>
       <br>
       <p class="body-text">Since our first annual trip to Telluride Mountain in 2022, we've taken alumni to some of the best mountains in the country — Crested Butte, Aspen/Snowmass, and Jackson Hole among them. We partner with OutsideLife to put together an all-inclusive package at a price that's genuinely hard to beat anywhere else.</p>
       <br>
       <p class="body-text">Our trip is open to all Kent State alumni, their friends, and family. You handle your flight, we handle the rest. Whether you are a seasoned shredder or clicking into bindings for the first time, you will find your people here.</p>
+      <br>
+      <p class="body-text">The Kent State University Alumni Ski & Snowboard Club hosts the premier annual ski trip for Kent State graduates and Ohio alumni. Founded in 2022, our group travels to world-class mountain destinations each January — Telluride, Aspen, Jackson Hole, and beyond — with an all-inclusive package through OutsideLife. Whether you're a lifelong Flasher or a friend tagging along, the KSU annual ski trip is the best way to stay connected on the slopes. Join the Ohio alumni who've made this their favorite winter tradition.</p>
       <div class="about-stats">
         <div class="stat-block"><div class="stat-num">2022</div><div class="stat-label">Founded</div></div>
         <div class="stat-block"><div class="stat-num">40+</div><div class="stat-label">Alumni per trip</div></div>
@@ -544,16 +575,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
       <div class="photo-item" data-src="images/20220109_180352-3b1b.webp"><img src="images/20220109_180352-3b1b.webp" alt="Snowboarders lineup" style="object-position:center 80%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="photo-item" data-src="images/20220108_121828-802b.webp"><img src="images/20220108_121828-802b.webp" alt="Group on slopes" style="object-position:center 55%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
     </div>
-    <div class="grid-gap"></div>
-    <div class="photo-grid g-b">
-      <div class="photo-item" data-src="images/20220109_180232-cc4f.webp"><img src="images/20220109_180232-cc4f.webp" alt="Summit trio" style="object-position:center 60%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20220109_180255-75af.webp"><img src="images/20220109_180255-75af.webp" alt="Snowboarders" style="object-position:center 18%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20220108_165424-4f8b.webp"><img src="images/20220108_165424-4f8b.webp" alt="Night ski tree" style="object-position:center 50%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20220109_180348-0dbe.webp"><img src="images/20220109_180348-0dbe.webp" alt="Gondola sunset" style="object-position:center 40%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20220109_180343-12b8.webp"><img src="images/20220109_180343-12b8.webp" alt="Group snapshot" style="object-position:center 18%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20220109_180359-a159.webp"><img src="images/20220109_180359-a159.webp" alt="Skier on run" style="object-position:center 55%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20220109_180404-da86.webp"><img src="images/20220109_180404-da86.webp" alt="Skier posing" style="object-position:center 90%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-    </div>
+    <div class="view-all-wrap"><a href="telluride.html#gallery" class="view-all-link">View all photos →</a></div>
   </div>
 
   <!-- JACKSON HOLE '23 -->
@@ -570,15 +592,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
       <div class="photo-item" data-src="images/20230108_125802-5bfe.webp"><img src="images/20230108_125802-5bfe.webp" alt="Apres ski bar" style="object-position:center 28%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="photo-item" data-src="images/20230108_130056-eb7e.webp"><img src="images/20230108_130056-eb7e.webp" alt="Powder snowboarder" style="object-position:center 18%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
     </div>
-    <div class="grid-gap"></div>
-    <div class="photo-grid g-b">
-      <div class="photo-item" data-src="images/20230108_130052-7647.webp"><img src="images/20230108_130052-7647.webp" alt="Solo on summit" style="object-position:center 18%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20230108_130054-b755.webp"><img src="images/20230108_130054-b755.webp" alt="Dinner out" style="object-position:center 28%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20230108_130057-ec42.webp"><img src="images/20230108_130057-ec42.webp" alt="Ranch lot crew" style="object-position:center 22%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20230108_130100-a8f4.webp"><img src="images/20230108_130100-a8f4.webp" alt="Resting on slope" style="object-position:center 28%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20230108_201759-fbd5.webp"><img src="images/20230108_201759-fbd5.webp" alt="Solo snowboarder" style="object-position:center 18%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20230108_201802-a785.webp"><img src="images/20230108_201802-a785.webp" alt="Valley view" style="object-position:center 40%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-    </div>
+    <div class="view-all-wrap"><a href="jackson-hole.html#gallery" class="view-all-link">View all photos →</a></div>
   </div>
 
   <!-- CRESTED BUTTE '24 -->
@@ -595,17 +609,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
       <div class="photo-item" data-src="images/20240113_104358-6818.webp"><img src="images/20240113_104358-6818.webp" alt="Mushroom mittens" style="object-position:center 18%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="photo-item" data-src="images/20240113_115204-d02a.webp"><img src="images/20240113_115204-d02a.webp" alt="Summit crew" style="object-position:center 18%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
     </div>
-    <div class="grid-gap"></div>
-    <div class="photo-grid g-b">
-      <div class="photo-item" data-src="images/20240112_200458-fd60.webp"><img src="images/20240112_200458-fd60.webp" alt="Four on slope" style="object-position:center 50%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20240112_200502-916e.webp"><img src="images/20240112_200502-916e.webp" alt="Chairlift selfie" style="object-position:center 18%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20240113_104354-bc53.webp"><img src="images/20240113_104354-bc53.webp" alt="POV aspen trees" style="object-position:center 60%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20240113_104355-a5d1.webp"><img src="images/20240113_104355-a5d1.webp" alt="Girls crew selfie" style="object-position:center 70%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20240113_115202-446b.webp"><img src="images/20240113_115202-446b.webp" alt="Burton board raised" style="object-position:center 18%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20240113_134439-7906.webp"><img src="images/20240113_134439-7906.webp" alt="Ice sculpture town" style="object-position:center 28%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20240113_154351-47be.webp"><img src="images/20240113_154351-47be.webp" alt="Three skiers" style="object-position:center 60%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20240113_154536-aeb4.webp"><img src="images/20240113_154536-aeb4.webp" alt="Goofing in snow" style="object-position:center 50%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-    </div>
+    <div class="view-all-wrap"><a href="crested-butte.html#gallery" class="view-all-link">View all photos →</a></div>
   </div>
 
   <!-- ASPEN / SNOWMASS '25 -->
@@ -622,20 +626,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
       <div class="photo-item" data-src="images/20250111_090544-cf65.webp"><img src="images/20250111_090544-cf65.webp" alt="Girls at Aspen spade sculpture" style="object-position:center 35%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="photo-item" data-src="images/20250115_123117-7386.webp"><img src="images/20250115_123117-7386.webp" alt="Powder skier action" style="object-position:center 40%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
     </div>
-    <div class="grid-gap"></div>
-    <div class="photo-grid g-d">
-      <div class="photo-item" data-src="images/20250111_095534-6209.webp"><img src="images/20250111_095534-6209.webp" alt="Hotel lobby group photo" style="object-position:center 28%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250110_173233-94ef.webp"><img src="images/20250110_173233-94ef.webp" alt="Chairlift quad selfie" style="object-position:center 40%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250113_153931-8dc2.webp"><img src="images/20250113_153931-8dc2.webp" alt="Summit selfie trio" style="object-position:center 30%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250111_090545-00c2.webp"><img src="images/20250111_090545-00c2.webp" alt="Mountain valley through pines" style="object-position:center 70%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250112_135729-492f.webp"><img src="images/20250112_135729-492f.webp" alt="Two girls at spade sculpture" style="object-position:center 50%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250115_123113-4614.webp"><img src="images/20250115_123113-4614.webp" alt="Champagne spray apres" style="object-position:center 60%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250115_123112-3862.webp"><img src="images/20250115_123112-3862.webp" alt="Apres group with drinks" style="object-position:center 30%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250111_090550-6d74.jpg"><img src="images/20250111_090550-6d74.jpg" alt="Three snowboarders on slope" style="object-position:center 46%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250113_162628-8668.webp"><img src="images/20250113_162628-8668.webp" alt="Two girls goofing on slope" style="object-position:center 58%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250112_135730-20d8.webp"><img src="images/20250112_135730-20d8.webp" alt="Two girls on gondola" style="object-position:center 40%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20250113_130925-ecdb.webp"><img src="images/20250113_130925-ecdb.webp" alt="Three snowboarders red rock backdrop" style="object-position:center 60%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-    </div>
+    <div class="view-all-wrap"><a href="aspen-snowmass.html#gallery" class="view-all-link">View all photos →</a></div>
   </div>
 
   <div class="rule gallery-rule"></div>
@@ -654,20 +645,7 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
       <div class="photo-item" data-src="images/20260110_130854-a955.webp"><img src="images/20260110_130854-a955.webp" alt="Solo skier in trees" style="object-position:center 50%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
       <div class="photo-item" data-src="images/20260111_182341-6893.webp"><img src="images/20260111_182341-6893.webp" alt="Powder run view" style="object-position:center 75%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
     </div>
-    <div class="grid-gap"></div>
-    <div class="photo-grid g-d">
-      <div class="photo-item" data-src="images/20260110_131620-8da4.webp"><img src="images/20260110_131620-8da4.webp" alt="Bison statue night" style="object-position:center 28%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20260110_131620-78bf.webp"><img src="images/20260110_131620-78bf.webp" alt="Bootpacking couloir" style="object-position:center 55%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item r2" data-src="images/20260110_141458-358c.webp"><img src="images/20260110_141458-358c.webp" alt="Gondola selfie" style="object-position:center 95%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20260110_141458-0563.webp"><img src="images/20260110_141458-0563.webp" alt="Retro outfits swings" style="object-position:center 65%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20260110_141458-1277.webp"><img src="images/20260110_141458-1277.webp" alt="Two buried in powder" style="object-position:center 70%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20260111_175656-e26a.webp"><img src="images/20260111_175656-e26a.webp" alt="Dinner Christmas tree" style="object-position:center 28%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20260111_182341-f366.webp"><img src="images/20260111_182341-f366.webp" alt="Solo in pine trees" style="object-position:center 45%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20260111_182940-d92d.webp"><img src="images/20260111_182940-d92d.webp" alt="Four snowboarders" style="object-position:center 45%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20260111_182948-9d38.webp"><img src="images/20260111_182948-9d38.webp" alt="Two on swings" style="object-position:center 60%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20260112_213800-c40c.webp"><img src="images/20260112_213800-c40c.webp" alt="Guys at bar" style="object-position:center 45%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-      <div class="photo-item" data-src="images/20260110_141458-cbd5.webp"><img src="images/20260110_141458-cbd5.webp" alt="Two girls boards" style="object-position:center 40%;" loading="lazy"><div class="photo-item-overlay"></div><div class="photo-item-zoom"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
-    </div>
+    <div class="view-all-wrap"><a href="jackson-hole.html#gallery" class="view-all-link">View all photos →</a></div>
   </div>
 </section>
 
@@ -751,8 +729,33 @@ footer p { font-size: 11px; letter-spacing: 1.5px; color: var(--white-40); }
   <img class="lightbox-img-behind" id="lightboxImgBehind" src="" alt="">
   <button class="lightbox-next" id="lightboxNext">&#8594;</button>
   <span class="lightbox-counter" id="lightboxCounter"></span>
+  <div class="lightbox-heart" id="lightboxHeart">
+    <button class="heart-btn" id="lightboxHeartBtn" aria-label="Like photo"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+    <span class="heart-count" id="lightboxHeartCount"></span>
+  </div>
+  <a class="lightbox-view-all" id="lightboxViewAll" href="#">View all photos →</a>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script>
+// ── FIREBASE CONFIG — replace all PASTE_... values with your project's config ──
+const firebaseConfig = {
+  apiKey: "AIzaSyCep9I5oy_yGoj_z9TsnIeT5Xx52bID-ik",
+  authDomain: "ksu-ski-site.firebaseapp.com",
+  databaseURL: "https://ksu-ski-site-default-rtdb.firebaseio.com",
+  projectId: "ksu-ski-site",
+  storageBucket: "ksu-ski-site.firebasestorage.app",
+  messagingSenderId: "1010172087407",
+  appId: "1:1010172087407:web:dde1fbc5b3a4fbdeff519a"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+function photoKey(src) {
+  return src.split('/').pop().replace(/\./g, '_');
+}
+</script>
 <script>
 // Build mobile gallery strips (only on mobile)
 function buildMobileGalleryStrips() {
@@ -829,6 +832,13 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 });
 
 // Lightbox
+const tripPages = {
+  "Telluride '22": 'telluride.html#gallery',
+  "Jackson Hole '23": 'jackson-hole.html#gallery',
+  "Crested Butte '24": 'crested-butte.html#gallery',
+  "Aspen / Snowmass '25": 'aspen-snowmass.html#gallery',
+  "Jackson Hole '26": 'jackson-hole.html#gallery'
+};
 let currentPhotos = [], currentIndex = 0, currentTrip = '';
 
 function openLightbox(photos, index, trip) {
@@ -846,6 +856,9 @@ function updateLightbox() {
   img.src = currentPhotos[currentIndex];
   document.getElementById('lightboxTrip').textContent = currentTrip;
   document.getElementById('lightboxCounter').textContent = (currentIndex + 1) + ' / ' + currentPhotos.length;
+  const viewAll = document.getElementById('lightboxViewAll');
+  viewAll.href = tripPages[currentTrip] || '#';
+  updateLightboxHeart();
 }
 
 function closeLightbox() {
@@ -1024,6 +1037,138 @@ if (registerBlock && btnDisabled) {
     }
   });
 }
+
+// ── PHOTO HEARTS ─────────────────────────────────────────────────────────────
+const heartSVG = `<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+
+function isLiked(key) { return !!sessionStorage.getItem('liked_' + key); }
+function markLiked(key) { sessionStorage.setItem('liked_' + key, '1'); }
+
+function showDoubleTapHeart(container, x, y) {
+  const el = document.createElement('div');
+  el.className = 'dt-heart';
+  el.innerHTML = `<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+  container.appendChild(el);
+  el.addEventListener('animationend', () => el.remove());
+}
+
+function attachGridHeart(item) {
+  const src = item.dataset.src;
+  if (!src) return;
+  const key = photoKey(src);
+  const heartEl = document.createElement('div');
+  heartEl.className = 'photo-heart';
+  heartEl.innerHTML = `<button class="heart-btn" aria-label="Like photo">${heartSVG}</button><span class="heart-count"></span>`;
+  item.appendChild(heartEl);
+
+  const btn = heartEl.querySelector('.heart-btn');
+  const countEl = heartEl.querySelector('.heart-count');
+  const ref = db.ref('likes/' + key);
+
+  if (isLiked(key)) btn.classList.add('liked');
+
+  ref.on('value', snap => {
+    const n = snap.val() || 0;
+    countEl.textContent = n > 0 ? n : '';
+    heartEl.classList.toggle('has-likes', n > 0);
+  });
+
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    if (isLiked(key)) return;
+    markLiked(key);
+    btn.classList.add('liked');
+    btn.classList.remove('pop');
+    void btn.offsetWidth;
+    btn.classList.add('pop');
+    ref.transaction(n => (n || 0) + 1);
+  });
+
+  let lastTap = 0;
+  item.addEventListener('touchend', e => {
+    if (e.changedTouches.length !== 1) return;
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      lastTap = 0;
+      const rect = item.getBoundingClientRect();
+      const t = e.changedTouches[0];
+      showDoubleTapHeart(item, t.clientX - rect.left, t.clientY - rect.top);
+      if (!isLiked(key)) {
+        markLiked(key);
+        btn.classList.add('liked');
+        btn.classList.remove('pop');
+        void btn.offsetWidth;
+        btn.classList.add('pop');
+        ref.transaction(n => (n || 0) + 1);
+      }
+    } else {
+      lastTap = now;
+    }
+  }, { passive: true });
+}
+
+document.querySelectorAll('.photo-item[data-src]').forEach(attachGridHeart);
+
+// Lightbox heart
+let lbHeartRef = null, lbHeartOff = null;
+const lbHeartBtn = document.getElementById('lightboxHeartBtn');
+const lbHeartCount = document.getElementById('lightboxHeartCount');
+
+function updateLightboxHeart() {
+  const src = currentPhotos[currentIndex];
+  if (!src) return;
+  const key = photoKey(src);
+  if (lbHeartOff) { lbHeartOff(); lbHeartOff = null; }
+  lbHeartRef = db.ref('likes/' + key);
+  lbHeartBtn.classList.toggle('liked', isLiked(key));
+  const listener = lbHeartRef.on('value', snap => {
+    const n = snap.val() || 0;
+    lbHeartCount.textContent = n > 0 ? n : '';
+  });
+  lbHeartOff = () => lbHeartRef.off('value', listener);
+}
+
+lbHeartBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const src = currentPhotos[currentIndex];
+  if (!src) return;
+  const key = photoKey(src);
+  if (isLiked(key)) return;
+  markLiked(key);
+  lbHeartBtn.classList.add('liked');
+  lbHeartBtn.classList.remove('pop');
+  void lbHeartBtn.offsetWidth;
+  lbHeartBtn.classList.add('pop');
+  if (lbHeartRef) lbHeartRef.transaction(n => (n || 0) + 1);
+});
+
+// Lightbox double-tap to like
+let lastLbTap = 0;
+lbImg.addEventListener('touchend', e => {
+  if (lbSwipeActive) return;
+  if (e.changedTouches.length !== 1) return;
+  const now = Date.now();
+  const t = e.changedTouches[0];
+  if (now - lastLbTap < 300) {
+    lastLbTap = 0;
+    const src = currentPhotos[currentIndex];
+    if (!src) return;
+    const key = photoKey(src);
+    showDoubleTapHeart(lbEl, t.clientX, t.clientY);
+    if (!isLiked(key)) {
+      markLiked(key);
+      lbHeartBtn.classList.add('liked');
+      lbHeartBtn.classList.remove('pop');
+      void lbHeartBtn.offsetWidth;
+      lbHeartBtn.classList.add('pop');
+      if (lbHeartRef) lbHeartRef.transaction(n => (n || 0) + 1);
+    }
+  } else {
+    lastLbTap = now;
+  }
+});
 </script>
 </body>
 </html>
